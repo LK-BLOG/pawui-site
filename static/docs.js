@@ -70,6 +70,83 @@
     return s;
   }
 
+  /* ---------- lightweight syntax highlighting (no dependencies) ---------- */
+  function span(cls, text) {
+    return '<span class="' + cls + '">' + esc(text) + '</span>';
+  }
+
+  var PY_RE = /(#[^\n]*)|("""[\s\S]*?"""|'''[\s\S]*?'''|"(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*')|(@[\w.]+)|(\b(?:def|class|return|if|elif|else|for|while|in|not|and|or|is|None|True|False|import|from|as|with|try|except|finally|raise|lambda|yield|pass|break|continue|global|nonlocal|assert|del|async|await|self)\b)|(\b\d+(?:\.\d+)?\b)/g;
+
+  var PAW_RE = /(<!--[\s\S]*?-->)|("(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*')|(\{\$[^}]*\}|\{[A-Za-z_][^}]*\}|\$[A-Za-z_][\w.]*)|(<\/?[A-Za-z][\w-]*|\/?>)|([A-Za-z_][\w-]*(?=\s*=))|(\b(?:def|class|return|if|elif|else|for|while|in|not|and|or|is|None|True|False|import|from|as|with|try|except|finally|raise|lambda|yield|pass|break|continue|state|app|self)\b)|(\b\d+(?:\.\d+)?\b)/g;
+
+  var BASH_RE = /(#[^\n]*)|("(?:[^"\\\n]|\\.)*"|'[^'\n]*')|(\$\{[^}]*\}|\$[A-Za-z_]\w*)|(\B--?[A-Za-z][\w-]*)|(\b\d+(?:\.\d+)?\b)/g;
+
+  function tokenize(code, re, classify) {
+    re.lastIndex = 0;
+    var out = '';
+    var last = 0;
+    var m;
+    while ((m = re.exec(code)) !== null) {
+      if (m.index > last) out += esc(code.slice(last, m.index));
+      out += classify(m);
+      last = m.index + m[0].length;
+      if (m[0].length === 0) re.lastIndex++;
+    }
+    if (last < code.length) out += esc(code.slice(last));
+    return out;
+  }
+
+  function hlPython(code) {
+    return tokenize(code, PY_RE, function (m) {
+      if (m[1]) return span('tok-cmt', m[1]);
+      if (m[2]) return span('tok-str', m[2]);
+      if (m[3]) return span('tok-dec', m[3]);
+      if (m[4]) return span('tok-kw', m[4]);
+      if (m[5]) return span('tok-num', m[5]);
+      return esc(m[0]);
+    });
+  }
+
+  function hlPaw(code) {
+    return tokenize(code, PAW_RE, function (m) {
+      if (m[1]) return span('tok-cmt', m[1]);
+      if (m[2]) return span('tok-str', m[2]);
+      if (m[3]) return span('tok-val', m[3]);
+      if (m[4]) return span('tok-tag', m[4]);
+      if (m[5]) return span('tok-atr', m[5]);
+      if (m[6]) return span('tok-kw', m[6]);
+      if (m[7]) return span('tok-num', m[7]);
+      return esc(m[0]);
+    });
+  }
+
+  function hlBash(code) {
+    return tokenize(code, BASH_RE, function (m) {
+      if (m[1]) return span('tok-cmt', m[1]);
+      if (m[2]) return span('tok-str', m[2]);
+      if (m[3]) return span('tok-val', m[3]);
+      if (m[4]) return span('tok-atr', m[4]);
+      if (m[5]) return span('tok-num', m[5]);
+      return esc(m[0]);
+    });
+  }
+
+  function highlight(code, lang) {
+    if (lang === 'python' || lang === 'py') return hlPython(code);
+    if (lang === 'paw' || lang === 'html') return hlPaw(code);
+    if (lang === 'bash' || lang === 'sh' || lang === 'shell' || lang === 'console') return hlBash(code);
+    return esc(code);
+  }
+
+  function highlightCodeBlocks() {
+    var codes = elDoc.querySelectorAll('pre > code');
+    for (var i = 0; i < codes.length; i++) {
+      var code = codes[i];
+      var m = (code.className || '').match(/language-([\w-]+)/);
+      code.innerHTML = highlight(code.textContent, m ? m[1] : '');
+    }
+  }
+
   /* ---------- sidebar ---------- */
   function buildSidebar() {
     var html = '';
@@ -213,6 +290,7 @@
     buildToc();
     buildCrumbs(id);
     buildPager(id);
+    highlightCodeBlocks();
     addCodeCopyButtons();
 
     document.title = m.title + ' — PawUI';

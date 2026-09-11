@@ -929,6 +929,14 @@ section { padding: 150px 0; position: relative; }
   text-transform: uppercase;
   color: var(--text-4);
 }
+.markdown pre code .tok-cmt { color: var(--text-4); font-style: italic; }
+.markdown pre code .tok-str { color: #7ee787; }
+.markdown pre code .tok-kw  { color: #c792ea; }
+.markdown pre code .tok-num { color: #f78c6c; }
+.markdown pre code .tok-tag { color: #7aa2ff; }
+.markdown pre code .tok-atr { color: #ffcb6b; }
+.markdown pre code .tok-val { color: #6ec8ff; }
+.markdown pre code .tok-dec { color: #6ec8ff; }
 .markdown blockquote {
   margin: 20px 0;
   padding: 14px 20px;

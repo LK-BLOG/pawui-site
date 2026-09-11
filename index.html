@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PawUI — 用 Python 写 UI，像写 HTML 一样简单</title>
+<meta name="description" content="PawUI 是轻量声明式 Python UI 库：类 HTML 语法，Qt 原生渲染，响应式状态，零构建步骤，即写即跑。">
+<meta property="og:title" content="PawUI — 声明式 Python UI">
+<meta property="og:description" content="类 HTML 语法，Qt 原生渲染，零构建步骤。">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+
+<div class="atmos" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="grid"></div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="dot"></span>PawUI</a>
+    <nav class="header-nav">
+      <a class="nav-link" href="#features" data-zh="特性" data-en="Features">特性</a>
+      <a class="nav-link" href="#components" data-zh="组件" data-en="Components">组件</a>
+      <a class="nav-link" href="#install" data-zh="安装" data-en="Install">安装</a>
+      <span class="divider-v"></span>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang="zh" class="active">中</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a class="btn btn-sm btn-secondary" href="docs/index.html" data-zh="文档" data-en="Docs">文档</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="hero-badge rise r1">
+          <span class="live"></span>
+          <span class="tag" id="version-tag" hidden>v</span>
+          <span data-zh="声明式 Python UI" data-en="Declarative Python UI">声明式 Python UI</span>
+        </div>
+        <h1 class="h1 rise r2">
+          <span data-zh="用 Python 写界面" data-en="Build UIs in Python">用 Python 写界面</span><br>
+          <span class="grad" data-zh="像写 HTML 一样简单" data-en="as easy as HTML">像写 HTML 一样简单</span>
+        </h1>
+        <p class="lead rise r3" style="max-width:520px"
+           data-zh="PawUI 把类 HTML 的声明式语法带给 Qt。写 .paw 文件、用 Python 处理逻辑，状态一变界面自动刷新——没有构建，没有前端工具链。"
+           data-en="PawUI brings HTML-like declarative syntax to Qt. Write .paw files, handle logic in Python, and let state refresh the UI automatically — no build, no frontend toolchain.">
+          PawUI 把类 HTML 的声明式语法带给 Qt。写 .paw 文件、用 Python 处理逻辑，状态一变界面自动刷新——没有构建，没有前端工具链。
+        </p>
+        <div class="hero-actions rise r4">
+          <a class="btn btn-accent" href="docs/index.html#/getting-started" data-zh="开始使用" data-en="Get started">开始使用</a>
+          <a class="btn btn-secondary" href="docs/index.html" data-zh="浏览文档" data-en="Read the docs">浏览文档</a>
+          <a class="btn btn-ghost" href="https://pypi.org/project/pawui/" target="_blank" rel="noopener">PyPI</a>
+        </div>
+        <div class="hero-meta rise r5">
+          <span><i></i>Python 3.10+</span>
+          <span><i></i>PySide6 &ge; 6.5</span>
+          <span><i></i><span data-zh="17 个内置组件" data-en="17 components">17 个内置组件</span></span>
+        </div>
+      </div>
+
+      <div class="rise r4">
+        <div class="term" id="hero-term">
+          <div class="term-bar">
+            <div class="term-dots"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+            <div class="term-title" id="term-title">app.paw</div>
+            <button class="term-copy" data-copy="hero" type="button" data-zh="复制" data-en="Copy">复制</button>
+          </div>
+          <div class="term-tabs">
+            <button class="term-tab active" data-tab="code" type="button" data-zh="代码" data-en="Code">代码</button>
+            <button class="term-tab" data-tab="cli" type="button" data-zh="命令行" data-en="CLI">命令行</button>
+          </div>
+          <pre class="term-body" data-pane="code"><span class="c-tag">&lt;Window</span> <span class="c-atr">title</span>=<span class="c-str">"Counter"</span> <span class="c-atr">width</span>=<span class="c-str">"400"</span><span class="c-tag">&gt;</span>
+  <span class="c-tag">&lt;Column</span> <span class="c-atr">padding</span>=<span class="c-str">"32"</span> <span class="c-atr">spacing</span>=<span class="c-str">"16"</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;Text</span> <span class="c-atr">size</span>=<span class="c-str">"48"</span> <span class="c-atr">bold</span><span class="c-tag">&gt;</span>{$count}<span class="c-tag">&lt;/Text&gt;</span>
+    <span class="c-tag">&lt;Button</span> <span class="c-atr">on_click</span>=<span class="c-str">"inc"</span><span class="c-tag">&gt;</span>+1<span class="c-tag">&lt;/Button&gt;</span>
+  <span class="c-tag">&lt;/Column&gt;</span>
+<span class="c-tag">&lt;/Window&gt;</span>
+
+<span class="c-tag">&lt;script&gt;</span>
+<span class="c-key">state</span>.count = <span class="c-num">0</span>
+
+<span class="c-key">def</span> <span class="c-fn">inc</span>():
+    <span class="c-key">state</span>.count = <span class="c-key">state</span>.count + <span class="c-num">1</span>
+<span class="c-tag">&lt;/script&gt;</span></pre>
+          <pre class="term-body" data-pane="cli" hidden><span class="c-cmt"># 安装</span>
+<span class="c-prompt">$</span> pip install pawui
+
+<span class="c-cmt"># 运行</span>
+<span class="c-prompt">$</span> pawui app.paw
+
+<span class="c-cmt"># 热重载开发</span>
+<span class="c-prompt">$</span> pawui watch app.paw
+
+<span class="c-cmt"># 语法检查</span>
+<span class="c-prompt">$</span> pawui check app.paw</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section style="padding-top:8px;padding-bottom:0">
+    <div class="container">
+      <div class="stats reveal">
+        <div class="stat">
+          <div class="n">17</div>
+          <div class="l" data-zh="内置组件" data-en="Components">内置组件</div>
+        </div>
+        <div class="stat">
+          <div class="n">0</div>
+          <div class="l" data-zh="构建步骤" data-en="Build steps">构建步骤</div>
+        </div>
+        <div class="stat">
+          <div class="n">2</div>
+          <div class="l" data-zh="内置主题" data-en="Themes">内置主题</div>
+        </div>
+        <div class="stat">
+          <div class="n">3.10<span style="font-size:.5em">+</span></div>
+          <div class="l">Python</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES (bento) -->
+  <section id="features">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="eyebrow" data-zh="核心特性" data-en="Features">核心特性</span>
+        <h2 class="h2" data-zh="为什么选择 PawUI" data-en="Why PawUI">为什么选择 PawUI</h2>
+        <p data-zh="把命令式的 Qt 样板代码收敛成声明式语法，让你专注于界面本身。"
+           data-en="Collapse imperative Qt boilerplate into declarative syntax so you can focus on the interface itself.">
+          把命令式的 Qt 样板代码收敛成声明式语法，让你专注于界面本身。
+        </p>
+      </div>
+
+      <div class="bento">
+        <div class="card reveal">
+          <div class="ic">01</div>
+          <h3 data-zh="零构建，直接运行" data-en="Zero build, run directly">零构建，直接运行</h3>
+          <p data-zh="写 .paw 文件直接运行，不需要打包器、编译器或任何前端工具链。"
+             data-en="Run .paw files directly. No bundler, compiler, or frontend toolchain.">
+            写 .paw 文件直接运行，不需要打包器、编译器或任何前端工具链。
+          </p>
+          <span class="code-inline">pip install pawui</span>
+        </div>
+
+        <div class="card reveal rd1">
+          <div class="ic">02</div>
+          <h3 data-zh="响应式状态" data-en="Reactive state">响应式状态</h3>
+          <p data-zh="{$count} 绑定状态，赋值即刷新界面，无需手动操作控件。"
+             data-en="Bind with {$count}; assign state and the UI updates itself.">
+            <code>{$count}</code> 绑定状态，赋值即刷新界面，无需手动操作控件。
+          </p>
+          <span class="code-inline">state.count += 1</span>
+        </div>
+
+        <div class="card reveal rd2">
+          <div class="ic">03</div>
+          <h3 data-zh="原生渲染" data-en="Native rendering">原生渲染</h3>
+          <p data-zh="Qt 抗锯齿、圆角、悬停态、IME 中文输入，全部原生处理。"
+             data-en="Qt antialiasing, rounded corners, hover states, and IME handled natively.">
+            Qt 抗锯齿、圆角、悬停态、IME 中文输入，全部原生处理。
+          </p>
+        </div>
+
+        <div class="card reveal rd3">
+          <div class="ic">04</div>
+          <h3 data-zh="双主题与自定义色" data-en="Themes & custom colors">双主题与自定义色</h3>
+          <p data-zh="内置 dark / light，通过颜色令牌完全自定义。"
+             data-en="Built-in dark / light, fully customizable via color tokens.">
+            内置 dark / light，通过颜色令牌完全自定义。
+          </p>
+        </div>
+
+        <div class="card reveal rd1">
+          <div class="ic">05</div>
+          <h3 data-zh="声明式入场动画" data-en="Declarative animation">声明式入场动画</h3>
+          <p data-zh="加一个 animate 属性即可淡入、滑入或展开，支持缓动与逐个延时。"
+             data-en="Add an animate attribute to fade, slide, or reveal — with easing and stagger.">
+            加一个 <code>animate</code> 属性即可淡入、滑入或展开，支持缓动与逐个延时。
+          </p>
+          <span class="code-inline">animate="slide-up" stagger="60"</span>
+        </div>
+
+        <div class="card reveal rd2">
+          <div class="ic">06</div>
+          <h3 data-zh="热重载，状态保留" data-en="Hot reload, state preserved">热重载，状态保留</h3>
+          <p data-zh="保存 .paw 文件，窗口自动重建，State 与脚本函数保持不变。"
+             data-en="Save the .paw file and the window rebuilds, preserving State and functions.">
+            保存 <code>.paw</code> 文件，窗口自动重建，State 与脚本函数保持不变。
+          </p>
+          <span class="code-inline">pawui watch app.paw</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE -->
+  <section>
+    <div class="container showcase">
+      <div class="showcase-copy reveal">
+        <span class="eyebrow" data-zh="所见即所得" data-en="What you write is what you get">所见即所得</span>
+        <h2 class="h2" data-zh="声明式描述，原生体验" data-en="Declarative markup, native feel">声明式描述，原生体验</h2>
+        <p class="lead" data-zh="组件树直接映射到 Qt 控件。布局、状态与交互在同一种语法里表达，代码读起来就是界面的样子。"
+           data-en="Your component tree maps straight to Qt widgets. Layout, state, and interaction live in one syntax that reads like the UI it produces.">
+          组件树直接映射到 Qt 控件。布局、状态与交互在同一种语法里表达，代码读起来就是界面的样子。
+        </p>
+        <ul class="checklist">
+          <li><span class="tick">&#10003;</span><span data-zh="容器嵌套即布局，无需手动管理 geometry" data-en="Nested containers are the layout; no manual geometry">容器嵌套即布局，无需手动管理 geometry</span></li>
+          <li><span class="tick">&#10003;</span><span data-zh="事件处理器就是普通 Python 函数" data-en="Event handlers are plain Python functions">事件处理器就是普通 Python 函数</span></li>
+          <li><span class="tick">&#10003;</span><span data-zh="bind 直接完成双向绑定" data-en="bind gives you two-way binding directly">bind 直接完成双向绑定</span></li>
+          <li><span class="tick">&#10003;</span><span data-zh="异步任务不阻塞界面" data-en="Async tasks keep the UI responsive">异步任务不阻塞界面</span></li>
+        </ul>
+      </div>
+
+      <div class="mock reveal rd2">
+        <div class="mock-bar">
+          <div class="term-dots"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+          <span class="t" data-zh="仪表盘 — 实时渲染" data-en="Dashboard — live render">仪表盘 — 实时渲染</span>
+        </div>
+        <div class="mock-app">
+          <div class="mock-row">
+            <div class="mock-tile"><span class="k" data-zh="用户" data-en="Users">用户</span><span class="v a">1,284</span></div>
+            <div class="mock-tile"><span class="k" data-zh="订单" data-en="Orders">订单</span><span class="v b">342</span></div>
+            <div class="mock-tile"><span class="k" data-zh="错误" data-en="Errors">错误</span><span class="v c">3</span></div>
+          </div>
+          <div class="mock-progress"><i></i></div>
+          <div class="mock-input">
+            <div class="f" data-zh="搜索项目..." data-en="Search projects...">搜索项目...</div>
+            <div class="b" data-zh="搜索" data-en="Search">搜索</div>
+          </div>
+          <div class="mock-list">
+            <div class="mock-item"><span class="sw"></span><span class="fill" data-zh="自动保存已开启" data-en="Auto save enabled">自动保存已开启</span></div>
+            <div class="mock-item"><span class="sw off"></span><span class="fill" data-zh="桌面通知已关闭" data-en="Desktop notifications off">桌面通知已关闭</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPONENTS -->
+  <section id="components">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="eyebrow" data-zh="组件库" data-en="Components">组件库</span>
+        <h2 class="h2" data-zh="开箱即用的 17 个组件" data-en="17 components out of the box">开箱即用的 17 个组件</h2>
+        <p data-zh="从布局到交互，覆盖常见界面需求。每个组件都支持动画与弹性拉伸。"
+           data-en="From layout to interaction, covering common UI needs. Every component supports animation and flex.">
+          从布局到交互，覆盖常见界面需求。每个组件都支持动画与弹性拉伸。
+        </p>
+      </div>
+      <div class="bento" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">
+        <span class="cmd-row reveal" style="justify-content:center"><span class="v">Window</span></span>
+        <span class="cmd-row reveal rd1" style="justify-content:center"><span class="v">Column</span></span>
+        <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">Row</span></span>
+        <span class="cmd-row reveal rd3" style="justify-content:center"><span class="v">Scroll</span></span>
+        <span class="cmd-row reveal" style="justify-content:center"><span class="v">Tabs</span></span>
+        <span class="cmd-row reveal rd1" style="justify-content:center"><span class="v">Text</span></span>
+        <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">Button</span></span>
+        <span class="cmd-row reveal rd3" style="justify-content:center"><span class="v">Input</span></span>
+        <span class="cmd-row reveal" style="justify-content:center"><span class="v">TextArea</span></span>
+        <span class="cmd-row reveal rd1" style="justify-content:center"><span class="v">Checkbox</span></span>
+        <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">Slider</span></span>
+        <span class="cmd-row reveal rd3" style="justify-content:center"><span class="v">Progress</span></span>
+        <span class="cmd-row reveal" style="justify-content:center"><span class="v">Image</span></span>
+        <span class="cmd-row reveal rd1" style="justify-content:center"><span class="v">Divider</span></span>
+        <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">Spacer</span></span>
+        <span class="cmd-row reveal rd3" style="justify-content:center"><span class="v">Tooltip</span></span>
+        <span class="cmd-row reveal" style="justify-content:center"><span class="v">Web</span></span>
+        <span class="cmd-row reveal rd1" style="justify-content:center"><span class="v">If</span></span>
+        <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">For</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section>
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="eyebrow" data-zh="上手" data-en="Getting started">上手</span>
+        <h2 class="h2" data-zh="三步构建第一个应用" data-en="Three steps to your first app">三步构建第一个应用</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <h3 data-zh="安装" data-en="Install">安装</h3>
+          <p data-zh="一行命令完成，PySide6 依赖自动安装。"
+             data-en="One command; the PySide6 dependency is installed automatically.">
+            一行命令完成，PySide6 依赖自动安装。
+          </p>
+          <p style="margin-top:10px"><code>pip install pawui</code></p>
+        </div>
+        <div class="step reveal rd1">
+          <h3 data-zh="编写 .paw" data-en="Write a .paw file">编写 .paw</h3>
+          <p data-zh="用类 HTML 语法描述界面，用 Python 处理逻辑与状态。"
+             data-en="Describe the UI in HTML-like syntax and handle logic and state in Python.">
+            用类 HTML 语法描述界面，用 Python 处理逻辑与状态。
+          </p>
+        </div>
+        <div class="step reveal rd2">
+          <h3 data-zh="运行" data-en="Run">运行</h3>
+          <p data-zh="窗口即开即用，开发时开启热重载。"
+             data-en="The window opens instantly; enable hot reload while developing.">
+            窗口即开即用，开发时开启热重载。
+          </p>
+          <p style="margin-top:10px"><code>pawui watch app.paw</code></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALL -->
+  <section id="install">
+    <div class="container install-grid">
+      <div class="reveal">
+        <span class="eyebrow" data-zh="开始使用" data-en="Get started">开始使用</span>
+        <h2 class="h2" style="margin-top:18px" data-zh="一行命令，从零到跑" data-en="One command, from zero to running">一行命令，从零到跑</h2>
+        <p class="lead" style="margin-top:14px" data-zh="支持 Windows / macOS / Linux，核心依赖极简。"
+           data-en="Windows / macOS / Linux, with a minimal dependency footprint.">
+          支持 Windows / macOS / Linux，核心依赖极简。
+        </p>
+        <div class="cmd-list">
+          <div class="cmd-row"><span class="k">install</span><span class="v">pip install pawui</span><span class="d" data-zh="安装" data-en="install">安装</span></div>
+          <div class="cmd-row"><span class="k">run</span><span class="v">pawui app.paw</span><span class="d" data-zh="运行" data-en="run">运行</span></div>
+          <div class="cmd-row"><span class="k">watch</span><span class="v">pawui watch app.paw</span><span class="d" data-zh="热重载" data-en="hot reload">热重载</span></div>
+          <div class="cmd-row"><span class="k">check</span><span class="v">pawui check app.paw</span><span class="d" data-zh="检查" data-en="check">检查</span></div>
+          <div class="cmd-row"><span class="k">schema</span><span class="v">pawui schema</span><span class="d" data-zh="组件 Schema" data-en="schema">组件 Schema</span></div>
+          <div class="cmd-row"><span class="k">help</span><span class="v">pawui help [topic]</span><span class="d" data-zh="帮助" data-en="help">帮助</span></div>
+        </div>
+      </div>
+
+      <div class="term reveal rd2">
+        <div class="term-bar">
+          <div class="term-dots"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+          <div class="term-title">terminal</div>
+          <button class="term-copy" data-copy="install" type="button" data-zh="复制" data-en="Copy">复制</button>
+        </div>
+        <pre class="term-body" id="install-term" style="min-height:auto"><span class="c-prompt">$</span> pip install pawui
+<span class="c-cmt">Successfully installed pawui-<span data-version>?</span> PySide6-6.5.0</span>
+
+<span class="c-prompt">$</span> pawui app.paw
+<span class="c-cmt"># 窗口已打开</span>
+
+<span class="c-prompt">$</span> pawui check app.paw
+<span class="c-cmt">✓ app.paw: syntax OK</span>
+<span class="c-cmt">  Elements: 1</span>
+<span class="c-cmt">  Script: yes</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="container">
+      <div class="cta reveal">
+        <span class="eyebrow" data-zh="现在开始" data-en="Start now">现在开始</span>
+        <h2 class="h2" data-zh="准备好用 Python 构建界面了吗？" data-en="Ready to build UIs in Python?">准备好用 Python 构建界面了吗？</h2>
+        <p data-zh="从快速上手开始，几分钟内运行你的第一个 PawUI 应用。"
+           data-en="Start with the guide and run your first PawUI app in minutes.">
+          从快速上手开始，几分钟内运行你的第一个 PawUI 应用。
+        </p>
+        <div class="cta-actions">
+          <a class="btn btn-accent" href="docs/index.html#/getting-started" data-zh="快速上手" data-en="Getting started">快速上手</a>
+          <a class="btn btn-secondary" href="docs/index.html" data-zh="文档" data-en="Docs">文档</a>
+          <a class="btn btn-ghost" href="https://pypi.org/project/pawui/" target="_blank" rel="noopener">PyPI</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><span class="dot"></span>PawUI</a>
+        <p data-zh="轻量声明式 Python UI 库。类 HTML 语法，Qt 原生渲染，零构建步骤。"
+           data-en="A lightweight declarative UI library for Python. HTML-like syntax, native Qt rendering, zero build.">
+          轻量声明式 Python UI 库。类 HTML 语法，Qt 原生渲染，零构建步骤。
+        </p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <b data-zh="产品" data-en="Product">产品</b>
+          <a href="docs/index.html#/getting-started" data-zh="快速上手" data-en="Getting started">快速上手</a>
+          <a href="docs/index.html#/components" data-zh="组件" data-en="Components">组件</a>
+          <a href="docs/index.html#/api" data-zh="API 参考" data-en="API reference">API 参考</a>
+          <a href="docs/index.html#/examples" data-zh="示例" data-en="Examples">示例</a>
+        </div>
+        <div class="footer-col">
+          <b data-zh="指南" data-en="Guides">指南</b>
+          <a href="docs/index.html#/syntax" data-zh="语法参考" data-en="Syntax">语法参考</a>
+          <a href="docs/index.html#/state-scripts" data-zh="状态与脚本" data-en="State & scripts">状态与脚本</a>
+          <a href="docs/index.html#/theming" data-zh="主题" data-en="Theming">主题</a>
+          <a href="docs/index.html#/animation" data-zh="动画" data-en="Animation">动画</a>
+        </div>
+        <div class="footer-col">
+          <b data-zh="资源" data-en="Resources">资源</b>
+          <a href="https://pypi.org/project/pawui/" target="_blank" rel="noopener">PyPI</a>
+          <a href="docs/index.html#/cli" data-zh="命令行" data-en="CLI">命令行</a>
+          <a href="docs/index.html#/faq" data-zh="常见问题" data-en="FAQ">常见问题</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-zh="Python 3.10+ · PySide6 ≥ 6.5" data-en="Python 3.10+ · PySide6 ≥ 6.5">Python 3.10+ · PySide6 &ge; 6.5</span>
+      <span>PawUI</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- i18n ---------- */
+  var LANG_KEY = 'pawui_lang';
+  function currentLang() {
+    return localStorage.getItem(LANG_KEY) || 'zh';
+  }
+  function applyLang(lang) {
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    var nodes = document.querySelectorAll('[data-zh]');
+    for (var i = 0; i < nodes.length; i++) {
+      var v = nodes[i].getAttribute('data-' + lang);
+      if (v !== null) nodes[i].textContent = v;
+    }
+    var btns = document.querySelectorAll('.lang-toggle button');
+    for (var j = 0; j < btns.length; j++) {
+      btns[j].classList.toggle('active', btns[j].getAttribute('data-lang') === lang);
+    }
+  }
+  var langBtns = document.querySelectorAll('.lang-toggle button');
+  for (var lb = 0; lb < langBtns.length; lb++) {
+    langBtns[lb].addEventListener('click', function () {
+      var l = this.getAttribute('data-lang');
+      localStorage.setItem(LANG_KEY, l);
+      applyLang(l);
+    });
+  }
+  applyLang(currentLang());
+
+  /* ---------- version from PyPI RSS (live) ---------- */
+  var FEED = 'https://pypi.org/rss/project/pawui/releases.xml';
+  fetch(FEED, { cache: 'no-store' })
+    .then(function (r) { return r.text(); })
+    .then(function (xml) {
+      var doc = new DOMParser().parseFromString(xml, 'text/xml');
+      var item = doc.querySelector('item > title');
+      var version = item ? item.textContent.trim() : '';
+      if (!version) return;
+      var tag = document.getElementById('version-tag');
+      if (tag) { tag.textContent = 'v' + version; tag.hidden = false; }
+      var targets = document.querySelectorAll('[data-version]');
+      for (var i = 0; i < targets.length; i++) targets[i].textContent = version;
+    })
+    .catch(function () { /* offline: keep version hidden */ });
+
+  /* ---------- header on scroll ---------- */
+  var header = document.getElementById('header');
+  function onScroll() {
+    header.classList.toggle('scrolled', window.scrollY > 12);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- terminal tabs ---------- */
+  var term = document.getElementById('hero-term');
+  if (term) {
+    var tabs = term.querySelectorAll('.term-tab');
+    var panes = term.querySelectorAll('[data-pane]');
+    function selectTab(name) {
+      for (var i = 0; i < tabs.length; i++) {
+        tabs[i].classList.toggle('active', tabs[i].getAttribute('data-tab') === name);
+      }
+      for (var j = 0; j < panes.length; j++) {
+        panes[j].hidden = panes[j].getAttribute('data-pane') !== name;
+      }
+    }
+    for (var t = 0; t < tabs.length; t++) {
+      tabs[t].addEventListener('click', function () {
+        selectTab(this.getAttribute('data-tab'));
+      });
+    }
+  }
+
+  /* ---------- copy buttons ---------- */
+  function copyText(text, btn) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    var original = btn.getAttribute('data-zh') ? (currentLang() === 'zh' ? '复制' : 'Copy') : btn.textContent;
+    btn.textContent = currentLang() === 'zh' ? '已复制' : 'Copied';
+    setTimeout(function () { btn.textContent = original; }, 1400);
+  }
+  var copyBtns = document.querySelectorAll('.term-copy');
+  for (var c = 0; c < copyBtns.length; c++) {
+    copyBtns[c].addEventListener('click', function () {
+      var which = this.getAttribute('data-copy');
+      var text = '';
+      if (which === 'hero' && term) {
+        var active = term.querySelector('.term-tab.active');
+        var pane = term.querySelector('[data-pane="' + (active ? active.getAttribute('data-tab') : 'code') + '"]');
+        text = pane ? pane.textContent : '';
+      } else if (which === 'install') {
+        var it = document.getElementById('install-term');
+        text = it ? it.textContent : '';
+      }
+      copyText(text, this);
+    });
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    for (var r = 0; r < reveals.length; r++) io.observe(reveals[r]);
+  } else {
+    for (var q = 0; q < reveals.length; q++) reveals[q].classList.add('in');
+  }
+
+  /* ---------- card pointer glow ---------- */
+  var cards = document.querySelectorAll('.card');
+  for (var k = 0; k < cards.length; k++) {
+    cards[k].addEventListener('pointermove', function (e) {
+      var rect = this.getBoundingClientRect();
+      this.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+      this.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+    });
+  }
+})();
+</script>
+</body>
+</html>

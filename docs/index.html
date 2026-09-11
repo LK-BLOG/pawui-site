@@ -20,7 +20,7 @@
         <button type="button" data-lang="zh" class="active">中</button>
         <button type="button" data-lang="en">EN</button>
       </div>
-      <button class="menu-btn" id="menu-btn" type="button" aria-label="Menu">
+      <button class="menu-btn" id="menu-btn" type="button" aria-label="Toggle navigation" aria-controls="side-nav" aria-expanded="false">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
           <line x1="4" y1="7" x2="20" y2="7"></line>
           <line x1="4" y1="12" x2="20" y2="12"></line>
@@ -40,9 +40,10 @@
         <circle cx="11" cy="11" r="7"></circle>
         <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
       </svg>
-      <input type="search" id="doc-search" placeholder="搜索文档" autocomplete="off">
+      <input type="search" id="doc-search" placeholder="搜索文档" aria-label="搜索文档 / Search docs" autocomplete="off">
     </div>
-    <nav id="side-nav"></nav>
+    <nav id="side-nav" aria-label="Documentation"></nav>
+    <div class="side-ver" id="side-ver" hidden></div>
   </aside>
 
   <main class="docs-main">

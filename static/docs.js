@@ -29,6 +29,7 @@
   var elSearch = document.getElementById('doc-search');
   var side = document.getElementById('side');
   var scrim = document.getElementById('scrim');
+  var menuBtn = document.getElementById('menu-btn');
 
   /* ---------- helpers ---------- */
   function esc(s) {
@@ -89,28 +90,69 @@
     });
     elNav.innerHTML = html;
     markActive();
-    filterSidebar();
   }
 
   function markActive() {
     var links = elNav.querySelectorAll('.side-link');
     for (var i = 0; i < links.length; i++) {
-      links[i].classList.toggle('active', links[i].getAttribute('data-doc') === state.doc);
+      var active = state.doc !== '' && links[i].getAttribute('data-doc') === state.doc;
+      links[i].classList.toggle('active', active);
+      if (active) links[i].setAttribute('aria-current', 'page');
+      else links[i].removeAttribute('aria-current');
     }
   }
 
-  function filterSidebar() {
-    var q = state.query.trim().toLowerCase();
-    var links = elNav.querySelectorAll('.side-link');
-    for (var i = 0; i < links.length; i++) {
-      var title = links[i].getAttribute('data-title') || '';
-      links[i].style.display = (!q || title.indexOf(q) !== -1) ? '' : 'none';
+  /* ---------- full-text search ---------- */
+  var BODIES = null;
+  function getBodies() {
+    if (BODIES) return BODIES;
+    BODIES = {};
+    for (var i = 0; i < ORDER.length; i++) {
+      var id = ORDER[i];
+      BODIES[id] = {
+        zh: b64ToUtf8(DATA.docs[id].zh.body),
+        en: b64ToUtf8(DATA.docs[id].en.body)
+      };
     }
-    var groups = elNav.querySelectorAll('.side-group');
-    for (var g = 0; g < groups.length; g++) {
-      var visible = groups[g].querySelectorAll('.side-link:not([style*="none"])').length;
-      groups[g].style.display = visible ? '' : 'none';
+    return BODIES;
+  }
+
+  function escapeRegExp(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function runSearch(rawQuery) {
+    var q = rawQuery.trim();
+    if (!q) { buildSidebar(); return; }
+    var lower = q.toLowerCase();
+    var bodies = getBodies();
+    var results = [];
+    for (var i = 0; i < ORDER.length; i++) {
+      var id = ORDER[i];
+      var text = bodies[id][state.lang] || '';
+      var idx = text.toLowerCase().indexOf(lower);
+      if (idx === -1) continue;
+      var start = Math.max(0, idx - 24);
+      var end = Math.min(text.length, idx + q.length + 72);
+      var snippet = text.slice(start, end).replace(/\s+/g, ' ').trim();
+      results.push({ id: id, title: DATA.docs[id][state.lang].title, snippet: snippet });
     }
+    var html = '<div class="side-hint">' +
+      (state.lang === 'zh' ? '搜索结果' : 'Results') + ' · ' + results.length + '</div>';
+    if (!results.length) {
+      html += '<div class="side-empty">' +
+        (state.lang === 'zh' ? '无匹配结果' : 'No matches found') + '</div>';
+    } else {
+      var re = new RegExp('(' + escapeRegExp(q) + ')', 'ig');
+      for (var k = 0; k < results.length; k++) {
+        var r = results[k];
+        var safe = esc(r.snippet).replace(re, '<mark>$1</mark>');
+        html += '<a class="side-result" href="#/' + r.id + '">' +
+          '<span class="rt">' + esc(r.title) + '</span>' +
+          '<span class="rs">' + safe + '</span></a>';
+      }
+    }
+    elNav.innerHTML = html;
   }
 
   /* ---------- not found ---------- */
@@ -156,6 +198,15 @@
     for (var a = 0; a < anchors.length; a++) {
       anchors[a].setAttribute('target', '_blank');
       anchors[a].setAttribute('rel', 'noopener');
+    }
+
+    // wrap tables so wide content scrolls instead of breaking the page
+    var tables = elDoc.querySelectorAll('table');
+    for (var t = 0; t < tables.length; t++) {
+      var wrap = document.createElement('div');
+      wrap.className = 'table-wrap';
+      tables[t].parentNode.insertBefore(wrap, tables[t]);
+      wrap.appendChild(tables[t]);
     }
 
     assignHeadingIds();
@@ -312,7 +363,10 @@
       // in-page anchor within the current doc
       return;
     }
+    var hadQuery = state.query;
+    if (hadQuery) { state.query = ''; elSearch.value = ''; }
     renderDoc(id, { scroll: true });
+    if (hadQuery) buildSidebar();
     setupTocTracker();
   }
 
@@ -337,8 +391,10 @@
       var v = navHeads[n].getAttribute('data-' + lang);
       if (v !== null) navHeads[n].textContent = v;
     }
-    document.getElementById('doc-search').placeholder = lang === 'zh' ? '搜索文档' : 'Search docs';
-    buildSidebar();
+    elSearch.placeholder = lang === 'zh' ? '搜索文档' : 'Search docs';
+    elSearch.setAttribute('aria-label', lang === 'zh' ? '搜索文档' : 'Search docs');
+    if (state.query.trim()) runSearch(state.query); else buildSidebar();
+    renderVersion();
     if (rerender !== false) {
       renderDoc(state.route, { scroll: false });
       setupTocTracker();
@@ -346,9 +402,15 @@
   }
 
   /* ---------- sidebar mobile ---------- */
-  function openSidebar() { side.classList.add('open'); scrim.classList.add('show'); }
-  function closeSidebar() { side.classList.remove('open'); scrim.classList.remove('show'); }
-  document.getElementById('menu-btn').addEventListener('click', function () {
+  function openSidebar() {
+    side.classList.add('open'); scrim.classList.add('show');
+    menuBtn.setAttribute('aria-expanded', 'true');
+  }
+  function closeSidebar() {
+    side.classList.remove('open'); scrim.classList.remove('show');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+  menuBtn.addEventListener('click', function () {
     if (side.classList.contains('open')) closeSidebar(); else openSidebar();
   });
   scrim.addEventListener('click', closeSidebar);
@@ -356,14 +418,36 @@
   /* ---------- search ---------- */
   elSearch.addEventListener('input', function () {
     state.query = this.value;
-    filterSidebar();
+    runSearch(state.query);
   });
+
+  /* ---------- version badge (live from PyPI RSS) ---------- */
+  var VERSION = '';
+  function renderVersion() {
+    var el = document.getElementById('side-ver');
+    if (!el || !VERSION) return;
+    el.textContent = (state.lang === 'zh' ? '适用于 PawUI v' : 'For PawUI v') + VERSION;
+    el.hidden = false;
+  }
+  function loadVersion() {
+    fetch('https://pypi.org/rss/project/pawui/releases.xml', { cache: 'no-store' })
+      .then(function (r) { return r.text(); })
+      .then(function (xml) {
+        var doc = new DOMParser().parseFromString(xml, 'text/xml');
+        var item = doc.querySelector('item > title');
+        if (!item) return;
+        VERSION = item.textContent.trim();
+        renderVersion();
+      })
+      .catch(function () { /* offline: keep hidden */ });
+  }
 
   /* ---------- init ---------- */
   function init() {
     marked.setOptions({ gfm: true, breaks: false });
     setLang(state.lang, false);
     navigate();
+    loadVersion();
     var btns = document.querySelectorAll('.lang-toggle button');
     for (var i = 0; i < btns.length; i++) {
       btns[i].addEventListener('click', function () {

@@ -23,9 +23,12 @@ OUT = ROOT / "static" / "data.js"
 
 GROUPS = [
     ("start", "开始", "Getting Started", ["index", "getting-started"]),
-    ("basics", "基础", "Basics", ["syntax", "layout", "components", "state-scripts", "events"]),
-    ("advanced", "进阶", "Advanced", ["animation", "theming", "custom-components"]),
-    ("reference", "参考", "Reference", ["api", "cli", "examples", "faq"]),
+    ("basics", "基础", "Basics",
+     ["syntax", "layout", "components", "state-scripts", "events", "data-binding"]),
+    ("advanced", "进阶", "Advanced",
+     ["animation", "theming", "custom-components", "performance", "best-practices"]),
+    ("reference", "参考", "Reference",
+     ["api", "cli", "examples", "recipes", "packaging", "faq"]),
 ]
 
 ORDER = [doc for _, _, _, docs in GROUPS for doc in docs]

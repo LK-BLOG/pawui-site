@@ -4,6 +4,8 @@
 
 No build step, no frontend toolchain, no hand-written `QWidget` boilerplate — `pip install pawui` and run.
 
+![PawUI dashboard example](../static/shots/dashboard-dark.png)
+
 ## The problem it solves
 
 Qt development means writing lots of imperative code: create widgets, set up layouts, connect signals, update the UI by hand. PawUI turns this into declarative syntax:

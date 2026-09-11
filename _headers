@@ -1,19 +1,10 @@
-/static/marked.min.js
-  Cache-Control: public, max-age=604800
-
-/static/dompurify.min.js
-  Cache-Control: public, max-age=604800
-
-/static/style.css
-  Cache-Control: public, max-age=86400
-
-/static/docs.js
-  Cache-Control: public, max-age=86400
-
-/static/data.js
-  Cache-Control: public, max-age=3600
+# Revalidate everything so deploys are picked up immediately.
+# (No filename hashing, so long-lived caching would serve stale assets.)
+/static/*
+  Cache-Control: public, max-age=0, must-revalidate
 
 /*
+  Cache-Control: public, max-age=0, must-revalidate
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN

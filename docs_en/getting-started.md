@@ -62,6 +62,10 @@ The window opens immediately. Click a button and `{$count}` updates from `state.
 
 > `pawui run app.paw` is equivalent.
 
+Result:
+
+![Counter app running](../static/shots/counter-dark.png)
+
 ## 4. Hot reload
 
 While developing:

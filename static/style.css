@@ -965,6 +965,15 @@ section { padding: 150px 0; position: relative; }
 .markdown tbody tr:last-child td { border-bottom: none; }
 .markdown tbody tr:hover td { background: rgba(255,255,255,.02); }
 .markdown hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+.markdown img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px 0;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #1e1e2e;
+}
 
 /* copy button on code blocks */
 .code-copy {

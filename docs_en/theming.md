@@ -13,6 +13,10 @@ Set it on `<Window>`:
 
 The default is `dark`.
 
+![Dark theme](../static/shots/dashboard-dark.png)
+
+![Light theme](../static/shots/dashboard-light.png)
+
 ## Color tokens
 
 | Token | dark default | light default | Use |

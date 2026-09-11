@@ -4,6 +4,8 @@
 
 没有构建步骤，没有前端工具链，也不需要手写 `QWidget` 样板代码——`pip install pawui` 之后直接运行。
 
+![PawUI 仪表盘示例](../static/shots/dashboard-dark.png)
+
 ## 它解决什么问题
 
 传统 Qt 开发要写大量命令式代码：创建控件、设置布局、连接信号、手动更新界面。PawUI 把这些收敛成声明式语法：

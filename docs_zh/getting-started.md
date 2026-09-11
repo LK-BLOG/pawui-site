@@ -62,6 +62,10 @@ pawui app.paw
 
 > 也可以直接 `pawui run app.paw`，效果相同。
 
+运行效果：
+
+![计数器运行效果](../static/shots/counter-dark.png)
+
 ## 4. 热重载开发
 
 开发时不想反复重启：

@@ -13,6 +13,10 @@ PawUI 内置 `dark` / `light` 两套主题，并通过**颜色令牌**统一组�
 
 默认是 `dark`。
 
+![深色主题](../static/shots/dashboard-dark.png)
+
+![浅色主题](../static/shots/dashboard-light.png)
+
 ## 颜色令牌
 
 | 令牌 | dark 默认 | light 默认 | 用途 |

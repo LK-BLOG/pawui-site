@@ -2,6 +2,8 @@
 
 PawUI 内置 **17 个组件**，覆盖布局、展示、交互与逻辑。所有组件都支持动画属性（`animate` / `duration` / `delay` / `easing`）与 `expand`。
 
+![设置面板示例](../static/shots/settings-dark.png)
+
 ## Window
 
 根窗口容器，每文件仅一个。

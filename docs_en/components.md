@@ -2,6 +2,8 @@
 
 PawUI ships **17 built-in components** across layout, display, interaction, and logic. Every component supports animation attributes (`animate` / `duration` / `delay` / `easing`) and `expand`.
 
+![Settings app example](../static/shots/settings-dark.png)
+
 ## Window
 
 Root container, exactly one per file.

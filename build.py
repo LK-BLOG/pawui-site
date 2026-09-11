@@ -22,13 +22,21 @@ DOCS_EN = ROOT / "docs_en"
 OUT = ROOT / "static" / "data.js"
 
 GROUPS = [
-    ("start", "开始", "Getting Started", ["index", "getting-started"]),
+    ("start", "开始", "Getting Started",
+     ["index", "getting-started", "project-structure"]),
     ("basics", "基础", "Basics",
-     ["syntax", "layout", "components", "state-scripts", "events", "data-binding"]),
+     ["syntax", "layout", "control-flow", "state-scripts", "state-advanced", "scripts",
+      "events", "async", "data-binding", "forms", "lists"]),
+    ("components", "组件", "Components",
+     ["components", "component-window", "component-text", "component-button", "component-input",
+      "component-checkbox", "component-slider", "component-progress", "component-scroll",
+      "component-tabs", "component-tooltip-web"]),
     ("advanced", "进阶", "Advanced",
-     ["animation", "theming", "custom-components", "performance", "best-practices"]),
+     ["animation", "easings", "stagger", "theming", "color-tokens", "typography",
+      "custom-components", "performance", "best-practices"]),
     ("reference", "参考", "Reference",
-     ["api", "cli", "examples", "recipes", "packaging", "faq"]),
+     ["api", "cli", "examples", "recipes", "packaging", "debugging",
+      "error-reference", "migration", "glossary", "faq"]),
 ]
 
 ORDER = [doc for _, _, _, docs in GROUPS for doc in docs]

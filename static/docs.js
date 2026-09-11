@@ -303,6 +303,9 @@
           var cls = code.className || '';
           var m = cls.match(/language-([\w-]+)/);
           if (m) lang = m[1];
+          // .paw files are authored with ```html for editor highlighting;
+          // label them correctly in the rendered docs.
+          if (lang === 'html') lang = 'paw';
         }
         if (lang) {
           var tag = document.createElement('span');

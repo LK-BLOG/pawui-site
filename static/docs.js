@@ -17,6 +17,7 @@
   var state = {
     lang: localStorage.getItem(LANG_KEY) || 'zh',
     doc: 'index',
+    route: 'index',
     query: ''
   };
 
@@ -112,9 +113,35 @@
     }
   }
 
+  /* ---------- not found ---------- */
+  function notFoundView(id) {
+    state.route = id;
+    state.doc = '';
+    var zh = state.lang === 'zh';
+    elDoc.innerHTML =
+      '<h1>' + (zh ? '页面未找到' : 'Page not found') + '</h1>' +
+      '<p>' + (zh
+        ? '找不到文档 “' + esc(id) + '”，它可能已被移动或重命名。'
+        : 'No document named “' + esc(id) + '”. It may have been moved or renamed.') +
+      '</p>' +
+      '<p><a href="#/index">' + (zh ? '返回文档首页' : 'Back to docs home') + '</a>' +
+      ' &nbsp;·&nbsp; <a href="../index.html">' + (zh ? '回官网' : 'Home page') + '</a></p>';
+    elCrumbs.innerHTML =
+      '<a href="../index.html">' + (zh ? '首页' : 'Home') + '</a>' +
+      '<span class="sep">/</span><span>404</span>';
+    elPager.innerHTML = '';
+    elTocNav.innerHTML = '';
+    document.title = (zh ? '页面未找到' : 'Not found') + ' — PawUI';
+    markActive();
+    try {
+      if (location.hash !== '#/' + id) history.replaceState(null, '', '#/' + id);
+    } catch (e) { /* file:// may block */ }
+  }
+
   /* ---------- render a document ---------- */
   function renderDoc(id, opts) {
-    if (!DATA.docs[id]) id = 'index';
+    state.route = id;
+    if (!DATA.docs[id]) { notFoundView(id); return; }
     state.doc = id;
     var m = meta(id);
     if (!m) return;
@@ -313,7 +340,7 @@
     document.getElementById('doc-search').placeholder = lang === 'zh' ? '搜索文档' : 'Search docs';
     buildSidebar();
     if (rerender !== false) {
-      renderDoc(state.doc, { scroll: false });
+      renderDoc(state.route, { scroll: false });
       setupTocTracker();
     }
   }

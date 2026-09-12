@@ -94,5 +94,5 @@ def go():
 
 ## Next
 
-- [Components](#/docs/components) — all components
-- [Packaging](#/docs/packaging) — excluding the Web module
+- [Components](#/components) — all components
+- [Packaging](#/packaging) — excluding the Web module

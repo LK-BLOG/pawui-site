@@ -102,5 +102,5 @@ def count(text):
 
 ## 下一步
 
-- [表单](#/docs/forms) — 表单校验
-- [数据绑定](#/docs/data-binding) — 绑定机制
+- [表单](#/forms) — 表单校验
+- [数据绑定](#/data-binding) — 绑定机制

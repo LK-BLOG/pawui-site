@@ -102,5 +102,5 @@ def submit():
 
 ## Next
 
-- [Error Reference](#/docs/error-reference) — error type catalog
-- [FAQ](#/docs/faq) — troubleshooting
+- [Error Reference](#/error-reference) — error type catalog
+- [FAQ](#/faq) — troubleshooting

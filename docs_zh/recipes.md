@@ -198,5 +198,5 @@ def add_log():
 
 ## 下一步
 
-- [示例](#/docs/examples) — 完整应用
-- [性能](#/docs/performance) — 让它跑得更顺
+- [示例](#/examples) — 完整应用
+- [性能](#/performance) — 让它跑得更顺

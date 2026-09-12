@@ -95,5 +95,5 @@ state.greeting = greeting
 
 ## Next
 
-- [State & Scripts](#/docs/state-scripts) — basics
-- [Forms](#/docs/forms) — state-driven forms
+- [State & Scripts](#/state-scripts) — basics
+- [Forms](#/forms) — state-driven forms

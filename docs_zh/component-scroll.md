@@ -82,5 +82,5 @@ def add_log():
 
 ## 下一步
 
-- [列表](#/docs/lists) — 列表渲染
-- [布局](#/docs/layout) — 容器与弹性
+- [列表](#/lists) — 列表渲染
+- [布局](#/layout) — 容器与弹性

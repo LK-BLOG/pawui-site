@@ -96,5 +96,5 @@ Make sure `--add-data` includes `assets`, and resolve paths at runtime with the 
 
 ## Next
 
-- [CLI](#/docs/cli) — all `pawui` commands
-- [FAQ](#/docs/faq) — troubleshooting
+- [CLI](#/cli) — all `pawui` commands
+- [FAQ](#/faq) — troubleshooting

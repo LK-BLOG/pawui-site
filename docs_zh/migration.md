@@ -120,5 +120,5 @@ def inc():
 
 ## 下一步
 
-- [快速上手](#/docs/getting-started) — 从零开始
-- [数据绑定](#/docs/data-binding) — 响应式细节
+- [快速上手](#/getting-started) — 从零开始
+- [数据绑定](#/data-binding) — 响应式细节

@@ -83,5 +83,5 @@ def start():
 
 ## Next
 
-- [Slider](#/docs/component-slider) — draggable values
-- [Async](#/docs/async) — loading tasks and progress
+- [Slider](#/component-slider) — draggable values
+- [Async](#/async) — loading tasks and progress

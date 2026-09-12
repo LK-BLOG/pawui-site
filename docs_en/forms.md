@@ -133,5 +133,5 @@ Because the field is bound via `value="{$draft}"`, clearing state clears the wid
 
 ## Next
 
-- [Recipes](#/docs/recipes) — copy-paste snippets
-- [Data Binding](#/docs/data-binding) — binding details
+- [Recipes](#/recipes) — copy-paste snippets
+- [Data Binding](#/data-binding) — binding details

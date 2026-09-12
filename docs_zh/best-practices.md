@@ -125,6 +125,6 @@ pawui check app.paw   # 语法检查
 
 ## 下一步
 
-- [性能](#/docs/performance) — 保持流畅
-- [打包与分发](#/docs/packaging) — 发布给用户
-- [自定义组件](#/docs/custom-components) — 组件化
+- [性能](#/performance) — 保持流畅
+- [打包与分发](#/packaging) — 发布给用户
+- [自定义组件](#/custom-components) — 组件化

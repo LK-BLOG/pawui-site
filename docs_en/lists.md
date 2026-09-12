@@ -132,9 +132,9 @@ def select(title):
 
 ## Performance
 
-`<For>` builds a widget per item. Paginate beyond a hundred items; always paginate in the thousands (see [Performance](#/docs/performance)).
+`<For>` builds a widget per item. Paginate beyond a hundred items; always paginate in the thousands (see [Performance](#/performance)).
 
 ## Next
 
-- [Control Flow](#/docs/control-flow) — `<For>` and `<If>` details
-- [Recipes](#/docs/recipes) — search/pagination snippets
+- [Control Flow](#/control-flow) — `<For>` and `<If>` details
+- [Recipes](#/recipes) — search/pagination snippets

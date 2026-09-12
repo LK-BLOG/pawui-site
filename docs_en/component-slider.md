@@ -94,5 +94,5 @@ state.level = level
 
 ## Next
 
-- [Progress](#/docs/component-progress) — progress display
-- [Forms](#/docs/forms) — form fields
+- [Progress](#/component-progress) — progress display
+- [Forms](#/forms) — form fields

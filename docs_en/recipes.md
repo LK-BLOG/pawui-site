@@ -198,5 +198,5 @@ def add_log():
 
 ## Next
 
-- [Examples](#/docs/examples) — complete apps
-- [Performance](#/docs/performance) — keep it smooth
+- [Examples](#/examples) — complete apps
+- [Performance](#/performance) — keep it smooth

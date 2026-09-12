@@ -85,5 +85,5 @@ Combine with conditional rendering to hide/disable until checked (`disabled` doe
 
 ## Next
 
-- [Forms](#/docs/forms) — form fields
-- [Data Binding](#/docs/data-binding) — write-back rules
+- [Forms](#/forms) — form fields
+- [Data Binding](#/data-binding) — write-back rules

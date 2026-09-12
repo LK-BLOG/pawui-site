@@ -103,10 +103,10 @@ Use `pawui check app.paw` to parse without running.
 - **Script**: defines functions and initial logic.
 - **state**: holds mutable data that drives the UI.
 
-Keep handlers small: read state → compute → write state (see [Best Practices](#/docs/best-practices)).
+Keep handlers small: read state → compute → write state (see [Best Practices](#/best-practices)).
 
 ## Next
 
-- [State, In Depth](#/docs/state-advanced) — subscriptions and lifecycle
-- [Async](#/docs/async) — long tasks
-- [API Reference](#/docs/api) — `Runtime` and `context`
+- [State, In Depth](#/state-advanced) — subscriptions and lifecycle
+- [Async](#/async) — long tasks
+- [API Reference](#/api) — `Runtime` and `context`

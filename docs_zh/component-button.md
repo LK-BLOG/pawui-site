@@ -88,5 +88,5 @@ PawUI 的 `disabled` 是构建时属性，不随状态实时变化。要动态�
 
 ## 下一步
 
-- [Input](#/docs/component-input) — 文本输入
-- [事件](#/docs/events) — 处理器规则
+- [Input](#/component-input) — 文本输入
+- [事件](#/events) — 处理器规则

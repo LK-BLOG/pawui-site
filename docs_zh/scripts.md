@@ -103,10 +103,10 @@ PawUI error: script block has invalid Python syntax: ...  (at line N:C)
 - **脚本**：定义函数与初始逻辑。
 - **state**：存放可变数据，驱动界面刷新。
 
-保持处理器短小：读取 state → 计算 → 写回 state（见[最佳实践](#/docs/best-practices)）。
+保持处理器短小：读取 state → 计算 → 写回 state（见[最佳实践](#/best-practices)）。
 
 ## 下一步
 
-- [状态进阶](#/docs/state-advanced) — 订阅与生命周期
-- [异步](#/docs/async) — 耗时任务
-- [API 参考](#/docs/api) — `Runtime` 与 `context`
+- [状态进阶](#/state-advanced) — 订阅与生命周期
+- [异步](#/async) — 耗时任务
+- [API 参考](#/api) — `Runtime` 与 `context`

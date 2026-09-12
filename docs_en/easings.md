@@ -65,5 +65,5 @@ PawUI respects the system "reduce motion" setting: when `prefers-reduced-motion`
 
 ## Next
 
-- [Animation](#/docs/animation) — types and attributes
-- [Stagger](#/docs/stagger) — sequenced entrances
+- [Animation](#/animation) — types and attributes
+- [Stagger](#/stagger) — sequenced entrances

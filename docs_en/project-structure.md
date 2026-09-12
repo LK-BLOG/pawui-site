@@ -38,7 +38,7 @@ if __name__ == "__main__":
     run("app.paw")
 ```
 
-This supports both `python main.py` and later PyInstaller packaging (see [Packaging](#/docs/packaging)).
+This supports both `python main.py` and later PyInstaller packaging (see [Packaging](#/packaging)).
 
 ## Resource paths
 
@@ -97,7 +97,7 @@ def add_item():
     ...
 ```
 
-For external dependencies, use `context` injection instead of hardcoding (see [Scripts](#/docs/scripts)).
+For external dependencies, use `context` injection instead of hardcoding (see [Scripts](#/scripts)).
 
 ## Dependencies and versions
 
@@ -128,5 +128,5 @@ pawui check app.paw   # syntax check
 
 ## Next
 
-- [Scripts](#/docs/scripts) — logic organization and injection
-- [Packaging](#/docs/packaging) — ship the app
+- [Scripts](#/scripts) — logic organization and injection
+- [Packaging](#/packaging) — ship the app

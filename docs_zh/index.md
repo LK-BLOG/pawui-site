@@ -76,16 +76,16 @@ def reset():
 
 ## 文档导航
 
-- [快速上手](#/docs/getting-started) — 安装并运行第一个应用
-- [语法参考](#/docs/syntax) — 标签、属性、模板、控制流
-- [布局](#/docs/layout) — 容器、间距与弹性
-- [组件](#/docs/components) — 全部 17 个组件
-- [状态与脚本](#/docs/state-scripts) — `state` 与 `<script>`
-- [事件](#/docs/events) — 处理器、绑定与异步
-- [动画](#/docs/animation) — 入场动画与缓动
-- [主题](#/docs/theming) — 颜色令牌与自定义
-- [自定义组件](#/docs/custom-components) — `<Component>` 与 `<Prop>`
-- [API 参考](#/docs/api) — Python 接口
-- [命令行](#/docs/cli) — `pawui` 命令
-- [示例](#/docs/examples) — 完整应用
-- [常见问题](#/docs/faq) — 排错与陷阱
+- [快速上手](#/getting-started) — 安装并运行第一个应用
+- [语法参考](#/syntax) — 标签、属性、模板、控制流
+- [布局](#/layout) — 容器、间距与弹性
+- [组件](#/components) — 全部 17 个组件
+- [状态与脚本](#/state-scripts) — `state` 与 `<script>`
+- [事件](#/events) — 处理器、绑定与异步
+- [动画](#/animation) — 入场动画与缓动
+- [主题](#/theming) — 颜色令牌与自定义
+- [自定义组件](#/custom-components) — `<Component>` 与 `<Prop>`
+- [API 参考](#/api) — Python 接口
+- [命令行](#/cli) — `pawui` 命令
+- [示例](#/examples) — 完整应用
+- [常见问题](#/faq) — 排错与陷阱

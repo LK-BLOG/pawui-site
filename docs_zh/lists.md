@@ -132,9 +132,9 @@ def select(title):
 
 ## 性能
 
-`<For>` 为每一项构建控件。上百项用分页，上千项务必分页（见[性能](#/docs/performance)）。
+`<For>` 为每一项构建控件。上百项用分页，上千项务必分页（见[性能](#/performance)）。
 
 ## 下一步
 
-- [控制流](#/docs/control-flow) — `<For>` 与 `<If>` 细则
-- [配方](#/docs/recipes) — 搜索/分页片段
+- [控制流](#/control-flow) — `<For>` 与 `<If>` 细则
+- [配方](#/recipes) — 搜索/分页片段

@@ -56,6 +56,8 @@ def read_doc(folder: Path, doc_id: str) -> tuple[str, str]:
         print(f"  ! missing {path}", file=sys.stderr)
         return doc_id, "{}"
     text = path.read_text(encoding="utf-8")
+    # Canonical docs routes are #/id; older markdown used #/docs/id.
+    text = text.replace("#/docs/", "#/")
     title = first_title(text, doc_id)
     body = base64.b64encode(text.encode("utf-8")).decode("ascii")
     return title, body

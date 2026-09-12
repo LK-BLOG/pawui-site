@@ -83,5 +83,5 @@ def start():
 
 ## 下一步
 
-- [Slider](#/docs/component-slider) — 可拖动取值
-- [异步](#/docs/async) — 加载任务与进度
+- [Slider](#/component-slider) — 可拖动取值
+- [异步](#/async) — 加载任务与进度

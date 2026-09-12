@@ -38,7 +38,7 @@ if __name__ == "__main__":
     run("app.paw")
 ```
 
-这样既能 `python main.py`，也方便后续用 PyInstaller 打包（见[打包与分发](#/docs/packaging)）。
+这样既能 `python main.py`，也方便后续用 PyInstaller 打包（见[打包与分发](#/packaging)）。
 
 ## 资源路径
 
@@ -97,7 +97,7 @@ def add_item():
     ...
 ```
 
-需要外部依赖时，用 `context` 注入而不是在脚本里硬编码（见[脚本](#/docs/scripts)）。
+需要外部依赖时，用 `context` 注入而不是在脚本里硬编码（见[脚本](#/scripts)）。
 
 ## 依赖与版本
 
@@ -128,5 +128,5 @@ pawui check app.paw   # 语法检查
 
 ## 下一步
 
-- [脚本](#/docs/scripts) — 逻辑组织与依赖注入
-- [打包与分发](#/docs/packaging) — 发布应用
+- [脚本](#/scripts) — 逻辑组织与依赖注入
+- [打包与分发](#/packaging) — 发布应用

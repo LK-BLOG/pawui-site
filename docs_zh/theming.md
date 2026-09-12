@@ -121,5 +121,5 @@ app.set_theme(theme)
 
 ## 下一步
 
-- [组件](#/docs/components) — 各组件支持的颜色属性
-- [API 参考](#/docs/api) — `Theme` 类与 `set_theme`
+- [组件](#/components) — 各组件支持的颜色属性
+- [API 参考](#/api) — `Theme` 类与 `set_theme`

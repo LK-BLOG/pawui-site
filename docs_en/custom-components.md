@@ -145,5 +145,5 @@ def pick():
 
 ## Next
 
-- [Syntax](#/docs/syntax) — related grammar
-- [State & Scripts](#/docs/state-scripts) — drive components with state
+- [Syntax](#/syntax) — related grammar
+- [State & Scripts](#/state-scripts) — drive components with state

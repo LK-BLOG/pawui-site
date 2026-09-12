@@ -80,5 +80,5 @@ Use `<TextArea readonly="true">` (a native text box; efficient scrolling) rather
 
 ## Next
 
-- [State & Scripts](#/docs/state-scripts) — how updates fire
-- [Events](#/docs/events) — `invoke_async` in depth
+- [State & Scripts](#/state-scripts) — how updates fire
+- [Events](#/events) — `invoke_async` in depth

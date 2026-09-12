@@ -118,7 +118,7 @@ myapp/
 
 ## Next steps
 
-- [Syntax](#/docs/syntax) — full tag and attribute list
-- [Layout](#/docs/layout) — containers and spacing
-- [Components](#/docs/components) — attribute tables for every component
-- [State & Scripts](#/docs/state-scripts) — how `state` drives the UI
+- [Syntax](#/syntax) — full tag and attribute list
+- [Layout](#/layout) — containers and spacing
+- [Components](#/components) — attribute tables for every component
+- [State & Scripts](#/state-scripts) — how `state` drives the UI

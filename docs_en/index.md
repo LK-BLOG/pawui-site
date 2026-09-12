@@ -77,16 +77,16 @@ def reset():
 
 ## Documentation map
 
-- [Getting Started](#/docs/getting-started) — install and run your first app
-- [Syntax](#/docs/syntax) — tags, attributes, templates, control flow
-- [Layout](#/docs/layout) — containers, spacing, flex
-- [Components](#/docs/components) — all 17 components
-- [State & Scripts](#/docs/state-scripts) — `state` and `<script>`
-- [Events](#/docs/events) — handlers, binding, async
-- [Animation](#/docs/animation) — entrance animations and easing
-- [Theming](#/docs/theming) — color tokens and customization
-- [Custom Components](#/docs/custom-components) — `<Component>` and `<Prop>`
-- [API Reference](#/docs/api) — Python interfaces
-- [CLI](#/docs/cli) — the `pawui` command
-- [Examples](#/docs/examples) — complete apps
-- [FAQ](#/docs/faq) — pitfalls and troubleshooting
+- [Getting Started](#/getting-started) — install and run your first app
+- [Syntax](#/syntax) — tags, attributes, templates, control flow
+- [Layout](#/layout) — containers, spacing, flex
+- [Components](#/components) — all 17 components
+- [State & Scripts](#/state-scripts) — `state` and `<script>`
+- [Events](#/events) — handlers, binding, async
+- [Animation](#/animation) — entrance animations and easing
+- [Theming](#/theming) — color tokens and customization
+- [Custom Components](#/custom-components) — `<Component>` and `<Prop>`
+- [API Reference](#/api) — Python interfaces
+- [CLI](#/cli) — the `pawui` command
+- [Examples](#/examples) — complete apps
+- [FAQ](#/faq) — pitfalls and troubleshooting

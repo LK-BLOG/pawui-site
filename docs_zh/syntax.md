@@ -69,7 +69,7 @@ def handler():
 | `If` | 条件渲染 |
 | `For` | 列表循环 |
 
-每个组件的完整属性见 [组件](#/docs/components)。
+每个组件的完整属性见 [组件](#/components)。
 
 ## 属性
 
@@ -169,7 +169,7 @@ def refresh():
 <Slider on_change="on_volume" bind="volume"/>
 ```
 
-处理器是脚本里同名的 Python 函数。运行时**只传入处理器声明了的参数**：无参函数不会被传参，带 `text` 参数的会收到文本。详见 [事件](#/docs/events)。
+处理器是脚本里同名的 Python 函数。运行时**只传入处理器声明了的参数**：无参函数不会被传参，带 `text` 参数的会收到文本。详见 [事件](#/events)。
 
 ## 自定义组件
 
@@ -185,7 +185,7 @@ def refresh():
 <Card title="我的卡片"/>
 ```
 
-详见 [自定义组件](#/docs/custom-components)。
+详见 [自定义组件](#/custom-components)。
 
 ## 主题
 
@@ -199,7 +199,7 @@ def refresh():
 </Theme>
 ```
 
-详见 [主题](#/docs/theming)。
+详见 [主题](#/theming)。
 
 ## 动画
 
@@ -212,4 +212,4 @@ def refresh():
 </Column>
 ```
 
-详见 [动画](#/docs/animation)。
+详见 [动画](#/animation)。

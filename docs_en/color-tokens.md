@@ -106,5 +106,5 @@ Hardcoded colors lose contrast in dark/light themes. Prefer tokens.
 
 ## Next
 
-- [Theming](#/docs/theming) — themes and switching
-- [Typography](#/docs/typography) — fonts and sizes
+- [Theming](#/theming) — themes and switching
+- [Typography](#/typography) — fonts and sizes

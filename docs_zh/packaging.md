@@ -96,5 +96,5 @@ PySide6 体积较大（数百 MB）。可以用 `--exclude-module` 排除不用�
 
 ## 下一步
 
-- [命令行](#/docs/cli) — `pawui` 的所有命令
-- [常见问题](#/docs/faq) — 排错
+- [命令行](#/cli) — `pawui` 的所有命令
+- [常见问题](#/faq) — 排错

@@ -65,5 +65,5 @@ PawUI 尊重系统的"减少动态"设置：`prefers-reduced-motion` 生效时�
 
 ## 下一步
 
-- [动画](#/docs/animation) — 动画类型与属性
-- [逐个入场](#/docs/stagger) — 序列化入场
+- [动画](#/animation) — 动画类型与属性
+- [逐个入场](#/stagger) — 序列化入场

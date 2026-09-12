@@ -36,7 +36,7 @@ If the top level is a set of UI elements without a `<Window>`, PawUI wraps them 
 
 ## Theme precedence
 
-`<Window theme="...">` sets the base theme (default `dark`). `<Theme extends="...">` and `<Color>` overrides apply on top. See [Theming](#/docs/theming).
+`<Window theme="...">` sets the base theme (default `dark`). `<Theme extends="...">` and `<Color>` overrides apply on top. See [Theming](#/theming).
 
 ## Changing title/size at runtime
 
@@ -67,5 +67,5 @@ Switching themes (`app.set_theme`) fades the window automatically.
 
 ## Next
 
-- [Column / Row](#/docs/layout) — layout containers
-- [Theming](#/docs/theming) — colors and theme switching
+- [Column / Row](#/layout) — layout containers
+- [Theming](#/theming) — colors and theme switching

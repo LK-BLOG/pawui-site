@@ -98,5 +98,5 @@ PawUI doesn't expose the active tab index; for per-tab logic, give each section 
 
 ## Next
 
-- [Layout](#/docs/layout) — container nesting
-- [Settings recipe](#/docs/recipes) — a full settings screen
+- [Layout](#/layout) — container nesting
+- [Settings recipe](#/recipes) — a full settings screen

@@ -166,5 +166,5 @@ def toggle_theme():
 
 ## Next
 
-- [State & Scripts](#/docs/state-scripts) — the full `state` API
-- [API Reference](#/docs/api) — `Runtime.invoke` / `invoke_async`
+- [State & Scripts](#/state-scripts) — the full `state` API
+- [API Reference](#/api) — `Runtime.invoke` / `invoke_async`

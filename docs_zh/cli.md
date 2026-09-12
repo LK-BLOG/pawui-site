@@ -132,5 +132,5 @@ code = main(["check", "app.paw"])   # 返回退出码
 
 ## 下一步
 
-- [API 参考](#/docs/api) — Python 接口
-- [常见问题](#/docs/faq) — 排错
+- [API 参考](#/api) — Python 接口
+- [常见问题](#/faq) — 排错

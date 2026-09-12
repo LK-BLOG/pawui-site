@@ -83,5 +83,5 @@ except PyxError as e:
 
 ## Next
 
-- [Debugging](#/docs/debugging) — diagnosis flow
-- [CLI](#/docs/cli) — `check` and `render`
+- [Debugging](#/debugging) — diagnosis flow
+- [CLI](#/cli) — `check` and `render`

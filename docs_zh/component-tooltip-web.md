@@ -94,5 +94,5 @@ def go():
 
 ## 下一步
 
-- [组件总览](#/docs/components) — 全部组件
-- [打包与分发](#/docs/packaging) — 排除 Web 模块
+- [组件总览](#/components) — 全部组件
+- [打包与分发](#/packaging) — 排除 Web 模块

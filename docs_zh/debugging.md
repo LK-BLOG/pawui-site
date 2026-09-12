@@ -102,5 +102,5 @@ def submit():
 
 ## 下一步
 
-- [错误参考](#/docs/error-reference) — 错误类型清单
-- [常见问题](#/docs/faq) — 排错 FAQ
+- [错误参考](#/error-reference) — 错误类型清单
+- [常见问题](#/faq) — 排错 FAQ

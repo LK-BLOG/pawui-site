@@ -293,5 +293,5 @@ pawui demo.paw
 
 ## 下一步
 
-- [组件](#/docs/components) — 组件属性速查
-- [常见问题](#/docs/faq) — 遇到问题怎么办
+- [组件](#/components) — 组件属性速查
+- [常见问题](#/faq) — 遇到问题怎么办

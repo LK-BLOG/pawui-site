@@ -81,5 +81,5 @@ state.summary = summary
 
 ## 下一步
 
-- [主题](#/docs/theming) — 颜色令牌
-- [数据绑定](#/docs/data-binding) — 插值细节
+- [主题](#/theming) — 颜色令牌
+- [数据绑定](#/data-binding) — 插值细节

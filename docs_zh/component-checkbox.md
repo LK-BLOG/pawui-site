@@ -85,5 +85,5 @@ state.agreed = False
 
 ## 下一步
 
-- [表单](#/docs/forms) — 表单字段
-- [数据绑定](#/docs/data-binding) — 写回规则
+- [表单](#/forms) — 表单字段
+- [数据绑定](#/data-binding) — 写回规则

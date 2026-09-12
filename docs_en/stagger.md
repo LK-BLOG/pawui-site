@@ -89,5 +89,5 @@ Use small values for many items, or the last one waits a long time.
 
 ## Next
 
-- [Animation](#/docs/animation) — animation types
-- [Easing Curves](#/docs/easings) — choosing curves
+- [Animation](#/animation) — animation types
+- [Easing Curves](#/easings) — choosing curves

@@ -82,5 +82,5 @@ PawUI renders natively on Qt; Chinese (and IME input) are handled by system font
 
 ## Next
 
-- [Color Tokens](#/docs/color-tokens) — reinforce hierarchy with color
-- [Theming](#/docs/theming) — theme parameters
+- [Color Tokens](#/color-tokens) — reinforce hierarchy with color
+- [Theming](#/theming) — theme parameters

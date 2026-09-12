@@ -102,5 +102,5 @@ def count(text):
 
 ## Next
 
-- [Forms](#/docs/forms) — form validation
-- [Data Binding](#/docs/data-binding) — binding mechanics
+- [Forms](#/forms) — form validation
+- [Data Binding](#/data-binding) — binding mechanics

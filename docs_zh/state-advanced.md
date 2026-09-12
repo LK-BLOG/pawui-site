@@ -95,5 +95,5 @@ state.greeting = greeting
 
 ## 下一步
 
-- [状态与脚本](#/docs/state-scripts) — 基础 API
-- [表单](#/docs/forms) — 用状态驱动表单
+- [状态与脚本](#/state-scripts) — 基础 API
+- [表单](#/forms) — 用状态驱动表单

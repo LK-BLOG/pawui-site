@@ -133,5 +133,5 @@ def submit():
 
 ## 下一步
 
-- [校验配方](#/docs/recipes) — 可复制片段
-- [数据绑定](#/docs/data-binding) — 绑定细节
+- [校验配方](#/recipes) — 可复制片段
+- [数据绑定](#/data-binding) — 绑定细节

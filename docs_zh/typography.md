@@ -82,5 +82,5 @@ PawUI 在 Qt 上原生渲染，中文（及 IME 输入）由系统字体处理�
 
 ## 下一步
 
-- [颜色令牌](#/docs/color-tokens) — 用颜色强化层级
-- [主题](#/docs/theming) — 主题参数
+- [颜色令牌](#/color-tokens) — 用颜色强化层级
+- [主题](#/theming) — 主题参数

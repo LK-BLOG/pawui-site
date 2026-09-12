@@ -102,5 +102,5 @@ def work():
 
 ## 下一步
 
-- [事件](#/docs/events) — 处理器解析规则
-- [性能](#/docs/performance) — 保持流畅
+- [事件](#/events) — 处理器解析规则
+- [性能](#/performance) — 保持流畅

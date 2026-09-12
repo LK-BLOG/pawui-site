@@ -80,5 +80,5 @@ state.page_items = page_items
 
 ## 下一步
 
-- [状态与脚本](#/docs/state-scripts) — 触发更新的机制
-- [事件](#/docs/events) — `invoke_async` 详解
+- [状态与脚本](#/state-scripts) — 触发更新的机制
+- [事件](#/events) — `invoke_async` 详解

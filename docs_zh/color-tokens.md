@@ -106,5 +106,5 @@ app.set_theme(t)
 
 ## 下一步
 
-- [主题](#/docs/theming) — 主题与切换
-- [排版](#/docs/typography) — 字体与字号
+- [主题](#/theming) — 主题与切换
+- [排版](#/typography) — 字体与字号

@@ -186,5 +186,5 @@ except PyxError as e:
 
 ## 下一步
 
-- [命令行](#/docs/cli) — `pawui` 的所有命令
-- [状态与脚本](#/docs/state-scripts) — 状态驱动界面
+- [命令行](#/cli) — `pawui` 的所有命令
+- [状态与脚本](#/state-scripts) — 状态驱动界面

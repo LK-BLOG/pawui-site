@@ -118,7 +118,7 @@ myapp/
 
 ## 下一步
 
-- [语法参考](#/docs/syntax) — 完整的标签与属性列表
-- [布局](#/docs/layout) — 容器与间距
-- [组件](#/docs/components) — 每个组件的属性表
-- [状态与脚本](#/docs/state-scripts) — 理解 `state` 如何驱动界面
+- [语法参考](#/syntax) — 完整的标签与属性列表
+- [布局](#/layout) — 容器与间距
+- [组件](#/components) — 每个组件的属性表
+- [状态与脚本](#/state-scripts) — 理解 `state` 如何驱动界面

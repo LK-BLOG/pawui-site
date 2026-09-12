@@ -83,5 +83,5 @@ except PyxError as e:
 
 ## 下一步
 
-- [调试](#/docs/debugging) — 定位流程
-- [命令行](#/docs/cli) — `check` 与 `render`
+- [调试](#/debugging) — 定位流程
+- [命令行](#/cli) — `check` 与 `render`

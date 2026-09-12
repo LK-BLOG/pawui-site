@@ -293,5 +293,5 @@ pawui demo.paw
 
 ## Next
 
-- [Components](#/docs/components) — component attribute reference
-- [FAQ](#/docs/faq) — when something goes wrong
+- [Components](#/components) — component attribute reference
+- [FAQ](#/faq) — when something goes wrong

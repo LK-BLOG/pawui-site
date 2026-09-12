@@ -121,5 +121,5 @@ app.set_theme(theme)
 
 ## Next
 
-- [Components](#/docs/components) — color attributes per component
-- [API Reference](#/docs/api) — the `Theme` class and `set_theme`
+- [Components](#/components) — color attributes per component
+- [API Reference](#/api) — the `Theme` class and `set_theme`

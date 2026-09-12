@@ -50,7 +50,7 @@ Reference state in the UI. When it changes, widgets using it update automaticall
 <Progress value="{$progress}" max="100"/>
 ```
 
-Three equivalent forms: `{$count}`, `{count}`, `$count` (see [Syntax](#/docs/syntax)).
+Three equivalent forms: `{$count}`, `{count}`, `$count` (see [Syntax](#/syntax)).
 
 ## Two-way binding (UI ↔ state)
 
@@ -172,5 +172,5 @@ state.count = count
 
 ## Next
 
-- [Events](#/docs/events) — how handlers are invoked
-- [API Reference](#/docs/api) — Python interfaces for `State` and `Runtime`
+- [Events](#/events) — how handlers are invoked
+- [API Reference](#/api) — Python interfaces for `State` and `Runtime`

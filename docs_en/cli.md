@@ -132,5 +132,5 @@ code = main(["check", "app.paw"])   # returns the exit code
 
 ## Next
 
-- [API Reference](#/docs/api) — Python interfaces
-- [FAQ](#/docs/faq) — troubleshooting
+- [API Reference](#/api) — Python interfaces
+- [FAQ](#/faq) — troubleshooting

@@ -143,5 +143,5 @@ Custom component props are read once at build. To react to state, use template b
 
 ## Next
 
-- [State & Scripts](#/docs/state-scripts) — the full `state` API
-- [Events](#/docs/events) — handlers and async
+- [State & Scripts](#/state-scripts) — the full `state` API
+- [Events](#/events) — handlers and async

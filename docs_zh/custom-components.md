@@ -145,5 +145,5 @@ def pick():
 
 ## 下一步
 
-- [语法参考](#/docs/syntax) — 组件相关语法
-- [状态与脚本](#/docs/state-scripts) — 用 state 驱动组件
+- [语法参考](#/syntax) — 组件相关语法
+- [状态与脚本](#/state-scripts) — 用 state 驱动组件

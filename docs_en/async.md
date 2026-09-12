@@ -98,5 +98,5 @@ def work():
 
 ## Next
 
-- [Events](#/docs/events) — handler resolution
-- [Performance](#/docs/performance) — keep it smooth
+- [Events](#/events) — handler resolution
+- [Performance](#/performance) — keep it smooth

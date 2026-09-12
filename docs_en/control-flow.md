@@ -106,9 +106,9 @@ A `<For>` over an empty list renders nothing. Pair with `<If>` for a placeholder
 
 ## Performance note
 
-`<For>` builds a real widget per item. With thousands of items, paginate or render only what's visible (see [Performance](#/docs/performance)).
+`<For>` builds a real widget per item. With thousands of items, paginate or render only what's visible (see [Performance](#/performance)).
 
 ## Next
 
-- [Lists](#/docs/lists) — rendering, add/remove
-- [Data Binding](#/docs/data-binding) — templates and scope
+- [Lists](#/lists) — rendering, add/remove
+- [Data Binding](#/data-binding) — templates and scope

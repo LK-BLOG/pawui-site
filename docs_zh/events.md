@@ -179,5 +179,5 @@ def toggle_theme():
 
 ## 下一步
 
-- [状态与脚本](#/docs/state-scripts) — `state` 的完整 API
-- [API 参考](#/docs/api) — `Runtime.invoke` / `invoke_async`
+- [状态与脚本](#/state-scripts) — `state` 的完整 API
+- [API 参考](#/api) — `Runtime.invoke` / `invoke_async`

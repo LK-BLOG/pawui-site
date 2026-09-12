@@ -82,5 +82,5 @@ Each line renders as a `<Text>`; the scroll area grows with the content.
 
 ## Next
 
-- [Lists](#/docs/lists) — list rendering
-- [Layout](#/docs/layout) — containers and flex
+- [Lists](#/lists) — list rendering
+- [Layout](#/layout) — containers and flex

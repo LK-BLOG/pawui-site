@@ -81,5 +81,5 @@ state.summary = summary
 
 ## Next
 
-- [Theming](#/docs/theming) — color tokens
-- [Data Binding](#/docs/data-binding) — interpolation details
+- [Theming](#/theming) — color tokens
+- [Data Binding](#/data-binding) — interpolation details

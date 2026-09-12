@@ -36,7 +36,7 @@ PawUI error: top-level elements must live inside <Window>
 
 ## 主题优先级
 
-`<Window theme="...">` 指定基础主题（默认 `dark`）。`<Theme extends="...">` 与 `<Color>` 覆盖会在此基础上应用。详见[主题](#/docs/theming)。
+`<Window theme="...">` 指定基础主题（默认 `dark`）。`<Theme extends="...">` 与 `<Color>` 覆盖会在此基础上应用。详见[主题](#/theming)。
 
 ## 运行时修改标题/尺寸
 
@@ -67,5 +67,5 @@ def rename():
 
 ## 下一步
 
-- [Column / Row](#/docs/layout) — 布局容器
-- [主题](#/docs/theming) — 颜色与主题切换
+- [Column / Row](#/layout) — 布局容器
+- [主题](#/theming) — 颜色与主题切换

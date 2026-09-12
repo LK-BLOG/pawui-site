@@ -88,5 +88,5 @@ Buttons also work as menu/sidebar items:
 
 ## Next
 
-- [Input](#/docs/component-input) — text input
-- [Events](#/docs/events) — handler rules
+- [Input](#/component-input) — text input
+- [Events](#/events) — handler rules

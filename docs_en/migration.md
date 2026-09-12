@@ -120,5 +120,5 @@ def inc():
 
 ## Next
 
-- [Getting Started](#/docs/getting-started) — from zero
-- [Data Binding](#/docs/data-binding) — reactivity details
+- [Getting Started](#/getting-started) — from zero
+- [Data Binding](#/data-binding) — reactivity details

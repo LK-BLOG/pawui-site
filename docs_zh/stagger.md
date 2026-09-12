@@ -89,5 +89,5 @@
 
 ## 下一步
 
-- [动画](#/docs/animation) — 动画类型
-- [缓动曲线](#/docs/easings) — 曲线选择
+- [动画](#/animation) — 动画类型
+- [缓动曲线](#/easings) — 曲线选择

@@ -186,5 +186,5 @@ except PyxError as e:
 
 ## Next
 
-- [CLI](#/docs/cli) — every `pawui` command
-- [State & Scripts](#/docs/state-scripts) — state-driven UI
+- [CLI](#/cli) — every `pawui` command
+- [State & Scripts](#/state-scripts) — state-driven UI

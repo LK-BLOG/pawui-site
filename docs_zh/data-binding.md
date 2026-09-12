@@ -143,5 +143,5 @@ state.count = state.get("count", 0) + 1   # 安全
 
 ## 下一步
 
-- [状态与脚本](#/docs/state-scripts) — `state` 的完整 API
-- [事件](#/docs/events) — 处理器与异步
+- [状态与脚本](#/state-scripts) — `state` 的完整 API
+- [事件](#/events) — 处理器与异步

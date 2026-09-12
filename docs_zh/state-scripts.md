@@ -51,7 +51,7 @@ state.watch("*", lambda v: print("任意键变化了"))  # 订阅全部
 <Progress value="{$progress}" max="100"/>
 ```
 
-支持的三种写法：`{$count}`、`{count}`、`$count`（见 [语法](#/docs/syntax)）。
+支持的三种写法：`{$count}`、`{count}`、`$count`（见 [语法](#/syntax)）。
 
 ## 双向绑定（UI ↔ state）
 
@@ -173,5 +173,5 @@ state.count = count
 
 ## 下一步
 
-- [事件](#/docs/events) — 处理器如何被调用
-- [API 参考](#/docs/api) — `State` 与 `Runtime` 的 Python 接口
+- [事件](#/events) — 处理器如何被调用
+- [API 参考](#/api) — `State` 与 `Runtime` 的 Python 接口

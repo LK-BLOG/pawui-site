@@ -94,5 +94,5 @@ state.level = level
 
 ## 下一步
 
-- [Progress](#/docs/component-progress) — 进度展示
-- [表单](#/docs/forms) — 表单字段
+- [Progress](#/component-progress) — 进度展示
+- [表单](#/forms) — 表单字段

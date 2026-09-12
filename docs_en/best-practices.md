@@ -125,6 +125,6 @@ pawui check app.paw   # syntax check
 
 ## Next
 
-- [Performance](#/docs/performance) — keep it smooth
-- [Packaging](#/docs/packaging) — ship to users
-- [Custom Components](#/docs/custom-components) — componentize
+- [Performance](#/performance) — keep it smooth
+- [Packaging](#/packaging) — ship to users
+- [Custom Components](#/custom-components) — componentize

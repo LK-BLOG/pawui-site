@@ -69,7 +69,7 @@ Rules:
 | `If` | Conditional rendering |
 | `For` | List loop |
 
-Full attributes for each component are in [Components](#/docs/components).
+Full attributes for each component are in [Components](#/components).
 
 ## Attributes
 
@@ -169,7 +169,7 @@ def refresh():
 <Slider on_change="on_volume" bind="volume"/>
 ```
 
-Handlers are Python functions with the same name in the script. The runtime **only passes the parameters the handler declares**: zero-arg functions get nothing, handlers with `text` receive the text. See [Events](#/docs/events).
+Handlers are Python functions with the same name in the script. The runtime **only passes the parameters the handler declares**: zero-arg functions get nothing, handlers with `text` receive the text. See [Events](#/events).
 
 ## Custom components
 
@@ -185,7 +185,7 @@ Handlers are Python functions with the same name in the script. The runtime **on
 <Card title="My card"/>
 ```
 
-See [Custom Components](#/docs/custom-components).
+See [Custom Components](#/custom-components).
 
 ## Theming
 
@@ -199,7 +199,7 @@ See [Custom Components](#/docs/custom-components).
 </Theme>
 ```
 
-See [Theming](#/docs/theming).
+See [Theming](#/theming).
 
 ## Animation
 
@@ -212,4 +212,4 @@ See [Theming](#/docs/theming).
 </Column>
 ```
 
-See [Animation](#/docs/animation).
+See [Animation](#/animation).

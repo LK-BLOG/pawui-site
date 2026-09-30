@@ -211,7 +211,7 @@ class Position
 # pawui/__init__.py
 __all__ = ["run", "main", "Runtime", "State", "Theme",
            "PawUIError", "PyxError", "ParseError", "RenderError", "ScriptError"]
-__version__ = "0.1.3"
+__version__ = "0.1.3.1"
 
 # pawui.cli
 run(path, context=None, theme="dark") -> None

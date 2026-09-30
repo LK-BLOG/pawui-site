@@ -11,7 +11,7 @@ PawUI 内置 `dark` / `light` 两套主题，并通过**颜色令牌**统一组�
 <Window theme="light"> ... </Window>
 ```
 
-默认是 `dark`。
+默认是 `light`（浅色背景 + 蓝色主色）。要深色界面显式写 `theme="dark"`。
 
 ![深色主题](../static/shots/dashboard-dark.png)
 
@@ -78,7 +78,7 @@ PawUI 内置 `dark` / `light` 两套主题，并通过**颜色令牌**统一组�
 
 解析顺序（后者覆盖前者）：
 
-1. 默认 `dark`
+1. 默认 `light`
 2. `<Window theme="...">` 指定的基础主题
 3. `<Theme extends="...">` 指定的基础主题
 4. `</Theme>` 内所有 `<Color>` 覆盖

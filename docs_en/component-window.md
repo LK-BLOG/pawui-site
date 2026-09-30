@@ -9,7 +9,7 @@ The root window container. Every `.paw` file must have exactly one `<Window>`.
 | `title` | str | `"PawUI"` | Window title |
 | `width` | int | `480` | Width (px) |
 | `height` | int | `640` | Height (px) |
-| `theme` | str | `"dark"` | `dark` / `light` |
+| `theme` | str | `"light"` | `dark` / `light` |
 | `padding` | int | `0` | Window padding |
 | `spacing` | int | `8` | Gap between children |
 
@@ -36,7 +36,7 @@ If the top level is a set of UI elements without a `<Window>`, PawUI wraps them 
 
 ## Theme precedence
 
-`<Window theme="...">` sets the base theme (default `dark`). `<Theme extends="...">` and `<Color>` overrides apply on top. See [Theming](#/theming).
+`<Window theme="...">` sets the base theme (default `light`). `<Theme extends="...">` and `<Color>` overrides apply on top. See [Theming](#/theming).
 
 ## Changing title/size at runtime
 

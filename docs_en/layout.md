@@ -11,7 +11,7 @@ The root window, exactly one per file.
 | `title` | str | `"PawUI"` | Window title |
 | `width` | int | `480` | Width in px |
 | `height` | int | `640` | Height in px |
-| `theme` | str | `"dark"` | `dark` / `light` |
+| `theme` | str | `"light"` | `dark` / `light` |
 | `padding` | int | `0` | Inner padding |
 | `spacing` | int | `8` | Gap between children |
 

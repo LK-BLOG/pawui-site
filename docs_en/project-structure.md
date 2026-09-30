@@ -103,7 +103,7 @@ For external dependencies, use `context` injection instead of hardcoding (see [S
 
 ```
 # requirements.txt
-pawui>=0.1.1
+pawui>=0.1.3
 ```
 
 Python ≥ 3.10; `PySide6` is installed automatically with `pawui`.

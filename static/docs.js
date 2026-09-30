@@ -506,8 +506,14 @@
   var VERSION = '';
   function renderVersion() {
     var el = document.getElementById('side-ver');
-    if (!el || !VERSION) return;
-    el.textContent = (state.lang === 'zh' ? '适用于 PawUI v' : 'For PawUI v') + VERSION;
+    if (!el) return;
+    /* 拿到 PyPI 上的版本就写具体版本号；拿不到（离线 / 还没发布）就写「最新版本」，
+       不能空着 —— 这行字是给读者判断文档对不对得上装的那份库用的。 */
+    if (VERSION) {
+      el.textContent = (state.lang === 'zh' ? '适用于 PawUI v' : 'For PawUI v') + VERSION;
+    } else {
+      el.textContent = state.lang === 'zh' ? '适用于 PawUI 最新版本' : 'For the latest PawUI';
+    }
     el.hidden = false;
   }
   function loadVersion() {
@@ -515,12 +521,16 @@
       .then(function (r) { return r.text(); })
       .then(function (xml) {
         var doc = new DOMParser().parseFromString(xml, 'text/xml');
-        var item = doc.querySelector('item > title');
-        if (!item) return;
-        VERSION = item.textContent.trim();
+        /* RSS 标题可能是「0.1.3」，也可能是「pawui 0.1.3」，只取版本号那一段 */
+        var items = doc.querySelectorAll('item');
+        for (var n = 0; n < items.length; n++) {
+          var raw = items[n].querySelector('title');
+          var m = raw && raw.textContent.trim().match(/(\d+\.\d+(?:\.\d+)?(?:[-+._a-zA-Z0-9]*)?)/);
+          if (m) { VERSION = m[1].replace(/^v/i, ''); break; }
+        }
         renderVersion();
       })
-      .catch(function () { /* offline: keep hidden */ });
+      .catch(function () { renderVersion(); });
   }
 
   /* ---------- init ---------- */
@@ -528,6 +538,7 @@
     marked.setOptions({ gfm: true, breaks: false });
     setLang(state.lang, false);
     navigate();
+    renderVersion();
     loadVersion();
     var btns = document.querySelectorAll('.lang-toggle button');
     for (var i = 0; i < btns.length; i++) {

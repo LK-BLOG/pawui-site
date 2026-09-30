@@ -9,9 +9,33 @@ pawui watch <file.paw>      # 热重载
 pawui check <file.paw>      # 语法检查
 pawui schema                # 输出组件 Schema (JSON)
 pawui render <file.paw>     # 离屏渲染
-pawui help [topic]          # 内置文档
+pawui inspect <file.paw>    # 控件树 + 命中的 CSS + state 订阅
+pawui help                  # 列出文档主题（线上获取）
+pawui help <topic>          # 打印某一篇
+pawui help --refresh        # 强制刷新线上文档
 pawui --version
 pawui --help
+```
+
+## 文档是线上取的
+
+`pawui help` 读的是**线上文档** —— 也就是官网渲染用的那份 `static/data.js`。
+所以文档改了不用等发版，装了旧版的用户也能读到最新内容：
+
+1. 缓存还新鲜（`%LOCALAPPDATA%\pawui\docs.json`，6 小时）→ 直接用；
+2. 否则拉 `https://pawui.pages.dev/static/data.js` 并写入缓存；
+3. 拿不到网（离线 / 内网）→ 静默回落到随包 `docs/`。
+
+每次输出末尾都会写明来源，你读的是哪一份一目了然。
+
+| 环境变量 | 作用 |
+| --- | --- |
+| `PAWUI_DOCS_OFFLINE=1` | 完全不走网络，只用缓存 + 随包文档 |
+| `PAWUI_DOCS_LANG=zh\|en` | 强制语言（默认按系统语言猜） |
+
+```bash
+PAWUI_DOCS_LANG=en pawui help style-css   # 读英文那篇
+pawui help --offline theming              # 一点网都不走
 ```
 
 ## run
@@ -108,7 +132,7 @@ pawui help components   # 打印某主题全文
 ## 版本与帮助
 
 ```bash
-pawui --version    # PawUI 0.1.1
+pawui --version    # PawUI 0.1.3
 pawui -h
 pawui --help
 ```

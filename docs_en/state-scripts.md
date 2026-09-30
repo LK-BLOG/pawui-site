@@ -1,176 +1,128 @@
 # State & Scripts
 
-PawUI's reactive core is a lightweight `state` object. **Write state → bound UI refreshes automatically.** No manual widget updates.
+## State Object
 
-## The `state` object
-
-Inside `<script>`, `state` is injected into the namespace and ready to use.
-
-### Reading
-
-```python
-state.count            # attribute style; "" if missing
-state["count"]         # dict style
-state.get("count", 0)  # with default; preferred for numbers
-state.has("count")     # membership
-state.keys()           # all keys
-state.snapshot()       # plain dict copy
-```
-
-> Note: reading an unset key via attribute access returns `""` rather than raising. Prefer `state.get("x", 0)` before arithmetic.
-
-### Writing
-
-```python
-state.count = 42          # attribute style
-state["count"] = 42       # dict style
-state.set("count", 42)    # method style
-```
-
-Writing notifies all listeners for that key, updating bound widgets.
-
-### Subscribing
-
-```python
-def on_count_change(value):
-    print("count is now", value)
-
-unsub = state.watch("count", on_count_change)
-# unsub()  # cancel
-state.watch("*", lambda v: print("any key changed"))  # watch all
-```
-
-## Template binding (state → UI)
-
-Reference state in the UI. When it changes, widgets using it update automatically:
+Global reactive state accessible from both markup and scripts.
 
 ```html
 <Text>{$count}</Text>
-<Text>Hello, {$name}</Text>
-<Progress value="{$progress}" max="100"/>
+<Text>{$user.name}</Text>
 ```
 
-Three equivalent forms: `{$count}`, `{count}`, `$count` (see [Syntax](#/syntax)).
+```python
+# In <script>
+state.count = 0
+state.user = {"name": "Alice"}
 
-## Two-way binding (UI ↔ state)
-
-Interactive components (`Input`, `TextArea`, `Checkbox`, `Slider`) use `bind` to **write back** to state:
-
-```html
-<Input bind="username"/>
-<Slider bind="volume" min="0" max="100"/>
-<Checkbox bind="agreed">Agree</Checkbox>
+# Triggers UI update
+state.count = 42
 ```
 
-To also push state back into the widget, give `value` a template:
+### State API
 
-```html
-<Input value="{$username}" bind="username"/>
-<Slider value="{$volume}" bind="volume"/>
+```python
+state.get(key, default="")      # Get value
+state.set(key, value)           # Set value (triggers watchers)
+state.has(key)                  # Check existence
+state.watch(key, fn)            # Subscribe to changes
+state.watch("*", fn)            # Subscribe to all changes
+state.keys()                    # List all keys
+state.snapshot()                # Copy of all data
 ```
 
-`bind="username"` writes user input to `state.username`; `value="{$username}"` updates the field when `state.username` changes.
+### Attribute Access
 
-## The `<script>` block
+```python
+state.count = 1          # Same as state.set("count", 1)
+value = state.count      # Same as state.get("count")
+value = state["count"]   # Dict-style access
+```
 
-- At most **one** `<script>` block per file, at the top level.
-- Its content is raw Python, compiled then executed.
-- The namespace includes `state`, `app` (the Runtime instance), and any injected `context`.
-- **Top-level functions** defined in the script enter the runtime namespace and can be referenced by name from `on_click` etc.
+### Watchers
+
+```python
+def on_count_change(new_value):
+    print(f"Count changed to {new_value}")
+
+unwatch = state.watch("count", on_count_change)
+state.count = 5  # Prints: Count changed to 5
+unwatch()        # Stop listening
+```
+
+## Script Block
+
+Raw Python executed at startup.
 
 ```html
 <script>
-state.items = ["Apple", "Banana"]
-state.selected = ""
+# Available: state, app (Runtime instance)
+state.title = "My App"
+state.items = ["a", "b", "c"]
 
-def select(item):
-    state.selected = item
+def add_item():
+    state.items = state.items + [f"item{len(state.items)}"]
 
 def clear():
     state.items = []
-    state.selected = ""
 </script>
 ```
 
-## Functions as state values
+### Available in Script
 
-Templates automatically **call** callable values:
+- `state` - State instance
+- `app` - Runtime instance (has `set_theme()`, `refresh()`)
+- Any function/variable defined here becomes available as event handler
+
+### Theme Switching
+
+```python
+def toggle_theme():
+    current = "light" if app.theme.background == "#1e1e2e" else "dark"
+    app.set_theme(current)
+    app.refresh()
+```
+
+### Refresh
+
+```python
+# Force full UI rebuild
+app.refresh()
+```
+
+## Control Flow
+
+Conditional rendering with `<If>`:
 
 ```html
-<Text>{$summary}</Text>
+<Window>
+    <If condition="{$logged_in}">
+        <Text>Welcome back!</Text>
+    </If>
+</Window>
 ```
 
-```python
-def summary():
-    return f"{len(state.items)} items"
+The `condition` prop accepts a resolved boolean, a state reference (`{$flag}`)
+or a literal string (`true` / `yes` / `on` / `1`).
 
-state.summary = summary
-```
-
-Every time `state.summary` is evaluated the function is called. Useful for lightweight derived values.
-
-## State persistence
-
-- **Window refresh (`app.refresh()`)**: UI rebuilds; the script does **not** re-run; State is preserved.
-- **Hot reload (`pawui watch`)**: source is re-parsed and the script re-runs, but the **State object and namespace functions are preserved**.
-- So an initialization like `state.count = 0` will overwrite on reload. To initialize only once:
-
-```python
-if not state.has("count"):
-    state.count = 0
-```
-
-## Common patterns
-
-### Form validation
-
-```python
-def submit():
-    if not state.username.strip():
-        state.error = "Username is required"
-        return
-    state.error = ""
-    # ... submit
-```
+Looping with `<For>`:
 
 ```html
-<Input bind="username" value="{$username}" placeholder="Username"/>
-<If condition="{$has_error}">
-  <Text color="danger">{$error}</Text>
-</If>
+<Window>
+    <For each="item" in="{$items}">
+        <Text>{$item.name} — {$item.price}$</Text>
+    </For>
+</Window>
 ```
 
-### List add/remove
+- `each` — the loop variable name (defaults to `item`).
+- `in` — a state/namespace reference to a list (use `{$items}` so the raw
+  list is used, not its string form).
+- Supports nested loops and `<If>` inside a loop, with full attribute /
+  index access on the loop value: `{$item.name}`, `{$row[0]}`.
 
-```python
-state.todos = []
+## Best Practices
 
-def add():
-    text = state.draft.strip()
-    if text:
-        state.todos = state.todos + [text]
-        state.draft = ""
-
-def remove(index):
-    items = list(state.todos)
-    items.pop(index)
-    state.todos = items
-```
-
-### Derived values
-
-```python
-def count():
-    return len(state.todos)
-
-state.count = count
-```
-
-```html
-<Text>{$count} items</Text>
-```
-
-## Next
-
-- [Events](#/events) — how handlers are invoked
-- [API Reference](#/api) — Python interfaces for `State` and `Runtime`
+1. **Keep logic in script** - No expressions in markup
+2. **Use state for UI data** - Triggers automatic updates
+3. **Handlers are pure functions** - Receive args, mutate state
+4. **Avoid side effects in script body** - Use handlers

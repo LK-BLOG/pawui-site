@@ -1,215 +1,117 @@
-# Syntax
+# Syntax Reference
 
-A PawUI file is an **element tree** plus an optional **`<script>` Python block**, with HTML-like syntax.
-
-## File structure
+## File Structure
 
 ```html
-<Window title="Title" width="480" height="360" theme="dark">
-  <!-- component tree -->
-  <Column padding="24">
-    <Text>Content</Text>
-  </Column>
+<!-- Comments are supported -->
+<Theme extends="dark">
+  <Color name="accent" value="#8b5cf6"/>
+</Theme>
+
+<Component name="MyComponent">
+  <!-- Component template -->
+</Component>
+
+<Window title="App" width="800" height="600" theme="dark">
+  <!-- UI content -->
 </Window>
 
 <script>
-# plain Python here
-state.count = 0
-
+# Python code here
 def handler():
-    state.count += 1
+    pass
 </script>
 ```
 
+## Value Interpolation
+
+Three equivalent syntaxes:
+
+```html
+<Text>{$count}</Text>
+<Text>{count}</Text>
+<Text>$count</Text>
+```
+
 Rules:
+- Names (plus attribute / index paths): `{$user.name}`, `{$items[0]}`, `{$row[0].label}`
+- Resolves from: component props → state → script namespace → theme colors
+- Computed values go in `<script>`
 
-- Top level is either a **single** `<Window>`, or a set of elements (auto-wrapped in an implicit Window).
-- Outside `<Window>` only `<script>`, `<Component>`, `<Theme>` are allowed.
-- Elements may self-close (`<Divider/>`) or be paired (`<Text>...</Text>`).
-- `<!-- comments -->` are supported.
-
-## Tags at a glance
-
-### Containers
-
-| Tag | Purpose |
-|-----|---------|
-| `Window` | Root window, exactly one per file |
-| `Column` | Vertical layout |
-| `Row` | Horizontal layout |
-| `Scroll` | Scrollable container |
-| `Tabs` / `Tab` | Tabbed pages |
-| `Tooltip` | Hover tooltip wrapper |
-
-### Display
-
-| Tag | Purpose |
-|-----|---------|
-| `Text` | Text |
-| `Image` | Image |
-| `Divider` | Separator |
-| `Spacer` | Flexible space |
-| `Progress` | Progress bar |
-
-### Interaction
-
-| Tag | Purpose |
-|-----|---------|
-| `Button` | Button |
-| `Input` | Single-line input |
-| `TextArea` | Multi-line input |
-| `Checkbox` | Toggle switch |
-| `Slider` | Slider |
-| `Web` | Embedded web view (needs PySide6-Addons) |
-
-### Logic
-
-| Tag | Purpose |
-|-----|---------|
-| `If` | Conditional rendering |
-| `For` | List loop |
-
-Full attributes for each component are in [Components](#/components).
-
-## Attributes
-
-### Forms
+## Control Flow
 
 ```html
-<Text size="20" bold color="accent">Title</Text>
-<Button disabled>Disabled</Button>
-<Divider thickness=2/>
+<If condition="{$logged_in}">...</If>
+<For each="item" in="{$items}">...</For>
+<Select items="{$options}" bind="selected"/>
 ```
 
-- Values may be double-quoted, single-quoted, or unquoted: `size="20"`, `size='20'`, `size=20`.
-- A bare attribute means `true`: `<Button disabled/>`.
-- `true` / `false` (case-insensitive) parse as booleans.
-
-### Color attributes
-
-Any color attribute (`bg`, `fg`, `color`, `accent`, ...) accepts a **theme token name**:
-
-```html
-<Text color="accent">Accent text</Text>
-<Button bg="surface" fg="text">Secondary</Button>
-```
-
-Tokens: `background` `surface` `text` `subtext` `accent` `border` `danger`, plus any custom color names. Hex values like `#ff6b6b` also work.
-
-## Template interpolation
-
-Reference state in text or attribute values. Three equivalent forms:
-
-```html
-<Text>{$count}</Text>      <!-- $ prefix, recommended -->
-<Text>{count}</Text>       <!-- no prefix -->
-```
-
-Paths are supported:
-
-```html
-<Text>{$user.name}</Text>
-<Text>{$items[0]}</Text>
-<Text>{$data["key"]}</Text>
-```
-
-Interpolation works inside a sentence:
-
-```html
-<Text>Hello {$name}! You have {$count} messages</Text>
-```
-
-## Control flow
-
-### `<If>` — conditional rendering
-
-`condition` takes a **boolean value** or a **single state reference**:
-
-```html
-<If condition="{$show_detail}">
-  <Text>Details</Text>
-</If>
-```
-
-> **Note**: `condition` does not evaluate expressions. `condition="{$a and $b}"` will not work as expected.
-> Compute a boolean state in the script instead:
-
-```python
-def refresh():
-    state.show_detail = bool(state.count > 0 and state.logged_in)
-```
-
-```html
-<If condition="{$show_detail}">
-  <Text>Details</Text>
-</If>
-```
-
-### `<For>` — list loop
-
-```html
-<For each="user" in="{$users}">
-  <Row spacing="8">
-    <Text>{$user.name}</Text>
-    <Text color="subtext">{$user.email}</Text>
-  </Row>
-</For>
-```
-
-- `each` is the loop variable name, default `item`.
-- `in` takes a list, usually a reference like `{$list}`.
-- The loop variable is visible only inside the `<For>` subtree.
+See [State & Scripts](state-scripts.md#control-flow).
 
 ## Events
 
 ```html
-<Button on_click="save">Save</Button>
-<Input on_change="on_name" on_enter="submit" bind="name"/>
-<Checkbox on_change="on_toggle" bind="enabled"/>
-<Slider on_change="on_volume" bind="volume"/>
+<Button on_click="handle_click">Click</Button>
+<Input on_change="on_text_change" on_enter="on_submit"/>
+<Checkbox on_change="on_toggle"/>
 ```
 
-Handlers are Python functions with the same name in the script. The runtime **only passes the parameters the handler declares**: zero-arg functions get nothing, handlers with `text` receive the text. See [Events](#/events).
+- `on_click` - no arguments
+- `on_change` on Input - receives string
+- `on_change` on Checkbox - receives boolean
+- `on_enter` on Input - receives current text
 
-## Custom components
+## Attributes
 
 ```html
-<Component name="Card">
-  <Prop name="title" default="Card"/>
-  <Column padding="16" bg="surface" radius="12" spacing="8">
-    <Text size="16" bold>{$title}</Text>
-  </Column>
-</Component>
+<!-- Quoted -->
+<Window title="My App" width="800"/>
 
-<!-- usage -->
-<Card title="My card"/>
+<!-- Unquoted (simple values) -->
+<Window title=App width=800/>
+
+<!-- Boolean -->
+<Button disabled/>
+<Checkbox checked/>
+
+<!-- Self-closing -->
+<Input/>
+<Divider/>
+<Spacer height="20"/>
 ```
 
-See [Custom Components](#/custom-components).
-
-## Theming
+## Layout
 
 ```html
-<Window theme="dark"> ... </Window>
-
-<!-- or customize -->
-<Theme extends="light">
-  <Color name="accent" value="#ff6b6b"/>
-  <Color name="brand" value="#4ecdc4"/>
-</Theme>
-```
-
-See [Theming](#/theming).
-
-## Animation
-
-```html
-<Text animate="fade">Fade in</Text>
-<Button animate="slide-up" duration="320" delay="80">Slide in</Button>
-<Column stagger="60">
+<!-- Vertical stack -->
+<Column padding="20" spacing="10">
   <Text>First</Text>
   <Text>Second</Text>
 </Column>
+
+<!-- Horizontal stack -->
+<Row spacing="10">
+  <Button>One</Button>
+  <Button>Two</Button>
+</Row>
+
+<!-- Nested -->
+<Column>
+  <Row>
+    <Text>Left</Text>
+    <Text>Right</Text>
+  </Row>
+</Column>
 ```
 
-See [Animation](#/animation).
+## Stagger Animation
+
+```html
+<Column stagger="50">
+  <Text animate="slide-up">Item 1</Text>
+  <Text animate="slide-up">Item 2</Text>
+  <Text animate="slide-up">Item 3</Text>
+</Column>
+```
+
+Each child gets `delay + index * stagger` ms delay.

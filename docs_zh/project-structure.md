@@ -103,7 +103,7 @@ def add_item():
 
 ```
 # requirements.txt
-pawui>=0.1.1
+pawui>=0.1.3
 ```
 
 Python ≥ 3.10，`PySide6` 会随 `pawui` 自动安装。

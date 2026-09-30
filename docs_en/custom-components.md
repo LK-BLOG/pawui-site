@@ -1,149 +1,107 @@
 # Custom Components
 
-Package repeated UI into reusable components. Define with `<Component name="...">` and use like a built-in tag.
-
-## Defining a component
+## Defining Components
 
 ```html
 <Component name="Card">
-  <Column padding="16" bg="surface" radius="12" spacing="8">
-    <Text size="16" bold>{$title}</Text>
-    <Text size="13" color="subtext">Placeholder content</Text>
-  </Column>
-</Component>
-```
-
-Definitions live at the top level (alongside `<Window>`) and are not rendered directly.
-
-## Using a component
-
-```html
-<Window title="Cards">
-  <Column padding="20" spacing="12">
-    <Card title="First"/>
-    <Card title="Second"/>
-  </Column>
-</Window>
-```
-
-The `title` attribute is referenced inside the component via `{$title}`.
-
-## Default properties with `<Prop>`
-
-`<Prop>` declares a default used when the attribute is omitted:
-
-```html
-<Component name="Badge">
-  <Prop name="text" default="Tag"/>
-  <Prop name="color" default="accent"/>
-  <Text size="12" bold color="{$color}" bg="surface" radius="999" padding="4 8">
-    {$text}
-  </Text>
-</Component>
-
-<Badge text="New" color="accent"/>
-<Badge text="Normal"/>          <!-- default color -->
-<Badge/>                         <!-- all defaults -->
-```
-
-## Attribute resolution order
-
-When a name is referenced inside a component, it resolves in this order:
-
-1. Attribute passed at the call site (`<Card title="...">`)
-2. `<Prop>` `default`
-3. Outer scope / state / theme
-
-So components can read external state and be overridden by arguments:
-
-```html
-<Component name="Stat">
-  <Prop name="value" default="0"/>
-  <Column padding="16" bg="surface" radius="12">
-    <Text size="28" bold color="accent">{$value}</Text>
+  <Column padding="16" spacing="8" bg="surface" radius="12">
     <Text size="12" color="subtext">{$label}</Text>
+    <Text size="20" bold="true">{$value}</Text>
   </Column>
 </Component>
 ```
 
+## Using Components
+
 ```html
-<Stat value="{$user_count}" label="Users"/>
-<Stat value="{$order_count}" label="Orders"/>
+<Card label="Users" value="{$user_count}"/>
+<Card label="Revenue" value="{$revenue}"/>
 ```
 
-## Passing event handlers
+### Props
 
-`on_*` attributes are special-cased — passed as callables into the component scope:
+- Passed as attributes: `<Card label="x" value="y"/>`
+- Accessed inside as `{$propName}`
+- All props are strings (interpolated if template)
 
-```html
-<Component name="ActionButton">
-  <Button on_click="{$on_click}" bg="accent">{$label}</Button>
-</Component>
-```
+## Component Scope
 
-```html
-<ActionButton label="Save" on_click="save"/>
-<ActionButton label="Cancel" on_click="cancel"/>
-```
-
-## Visibility
-
-- A component definition takes no layout and renders nothing itself.
-- The component's **root element** replaces the call site.
-- Components may nest other custom components.
+Each component instance gets its own scope with:
+- Passed props
+- Parent scope (inherited)
+- Can reference state and theme colors
 
 ```html
-<Component name="Panel">
-  <Column padding="16" bg="surface" radius="14" spacing="10">
-    <Badge text="{$status}"/>
-    <Text size="15" bold>{$heading}</Text>
-    {$body}
-  </Column>
-</Component>
-```
-
-## Complete example
-
-```html
-<Window title="Components" width="420" height="420" theme="dark">
-  <Column padding="24" spacing="16">
-    <Text size="22" bold color="accent">User cards</Text>
-    <For each="user" in="{$users}">
-      <UserCard name="{$user.name}" role="{$user.role}" on_click="pick"/>
-    </For>
-  </Column>
-</Window>
-
 <Component name="UserCard">
-  <Prop name="name" default="Anonymous"/>
-  <Prop name="role" default="Guest"/>
-  <Row padding="14" bg="surface" radius="12" spacing="12">
-    <Column spacing="2" expand>
-      <Text size="15" bold>{$name}</Text>
-      <Text size="12" color="subtext">{$role}</Text>
-    </Column>
-    <Button on_click="{$on_click}" bg="accent">Pick</Button>
+  <Column padding="12" bg="surface" radius="8">
+    <Row spacing="8">
+      <Text size="16" bold="true">{$name}</Text>
+      <Badge color="{$role_color}">{$role}</Badge>
+    </Row>
+    <Text size="13" color="subtext">{$email}</Text>
+  </Column>
+</Component>
+
+<!-- Usage -->
+<UserCard name="Alice" role="Admin" role_color="danger" email="alice@example.com"/>
+```
+
+## Nested Components
+
+```html
+<Component name="Page">
+  <Column spacing="20">
+    <Header title="{$title}"/>
+    <Content>{$content}</Content>
+    <Footer/>
+  </Column>
+</Component>
+
+<Component name="Header">
+  <Row spacing="16">
+    <Text size="24" bold="true">{$title}</Text>
+    <Spacer/>
+    <Button on_click="go_back">Back</Button>
   </Row>
 </Component>
-
-<script>
-state.users = [
-    {"name": "Alice", "role": "Admin"},
-    {"name": "Bob", "role": "Editor"},
-]
-
-def pick():
-    state.selected = "Selected"
-</script>
 ```
 
-## Notes
+## Default Props Pattern
 
-- Component names are case-sensitive; they must match `<Component name="...">` exactly.
-- A component must have a root body element, or you'll get `component <X> has no body`.
-- Component attributes are resolved **statically** (once per build). Rebuild the UI (`app.refresh()` or a state binding) to reflect changes.
+Since there's no native default props yet, handle in script:
 
-## Next
+```html
+<Component name="Button">
+  <script>
+  # In parent script or component script
+  # state.button_variant = state.get("variant", "primary")
+  </script>
+  <Button bg="{$variant}" on_click="{$on_click}">{$label}</Button>
+</Component>
+```
 
-- [Syntax](#/syntax) — related grammar
-- [State & Scripts](#/state-scripts) — drive components with state
+## Dynamic Components
+
+Components can be conditionally rendered using state:
+
+```html
+<Window>
+  <Column>
+    <Header/>
+    <If condition="{$show_content}">
+      <Content/>
+    </If>
+    <Footer/>
+  </Column>
+</Window>
+```
+
+Note: `<If>` and `<For>` are planned features (see roadmap).
+
+## Best Practices
+
+1. **Single responsibility** - One component, one purpose
+2. **Props as interface** - Don't reach into parent state directly
+3. **Use semantic names** - `UserCard` not `Div1`
+4. **Keep templates simple** - Complex logic in script
+5. **Reuse built-ins** - Compose from Column, Row, Text, etc.

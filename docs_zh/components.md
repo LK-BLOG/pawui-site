@@ -1,6 +1,6 @@
 # 组件
 
-PawUI 内置 **17 个组件**，覆盖布局、展示、交互与逻辑。所有组件都支持动画属性（`animate` / `duration` / `delay` / `easing`）与 `expand`。
+PawUI 内置 **44 个组件**，覆盖布局、展示、交互、数据与绘图。分类索引见 [组件总览](#/component-display)、[数据组件](#/component-data)、[表单控件](#/component-form-fields)、[布局组件](#/component-containers-extra)、[Canvas](#/component-canvas)。所有组件都支持动画属性（`animate` / `duration` / `delay` / `easing`）与 `expand`。
 
 ![设置面板示例](../static/shots/settings-dark.png)
 

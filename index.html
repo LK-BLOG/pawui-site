@@ -8,7 +8,7 @@
 <meta property="og:title" content="PawUI — 声明式 Python UI">
 <meta property="og:description" content="类 HTML 语法，Qt 原生渲染，零构建步骤。">
 <meta property="og:type" content="website">
-<link rel="stylesheet" href="static/style.css?v=6">
+<link rel="stylesheet" href="static/style.css?v=8">
 </head>
 <body>
 
@@ -26,6 +26,7 @@
       <a class="nav-link" href="#features" data-zh="特性" data-en="Features">特性</a>
       <a class="nav-link" href="#components" data-zh="组件" data-en="Components">组件</a>
       <a class="nav-link" href="#install" data-zh="安装" data-en="Install">安装</a>
+      <a class="nav-link" href="https://github.com/LK-BLOG/PawUI" target="_blank" rel="noopener">GitHub</a>
       <span class="divider-v"></span>
       <div class="lang-toggle" role="group" aria-label="Language">
         <button type="button" data-lang="zh" class="active">中</button>
@@ -64,7 +65,7 @@
         <div class="hero-meta rise r5">
           <span><i></i>Python 3.10+</span>
           <span><i></i>PySide6 &ge; 6.5</span>
-          <span><i></i><span data-zh="17 个内置组件" data-en="17 components">17 个内置组件</span></span>
+          <span><i></i><span data-zh="44 个内置组件" data-en="44 components">44 个内置组件</span></span>
         </div>
       </div>
 
@@ -176,11 +177,12 @@
 
         <div class="card reveal rd3">
           <div class="ic">04</div>
-          <h3 data-zh="双主题与自定义色" data-en="Themes & custom colors">双主题与自定义色</h3>
-          <p data-zh="内置 dark / light，通过颜色令牌完全自定义。"
-             data-en="Built-in dark / light, fully customizable via color tokens.">
-            内置 dark / light，通过颜色令牌完全自定义。
+          <h3 data-zh="在 .paw 里直接写 CSS3" data-en="CSS3 inside .paw">在 .paw 里直接写 CSS3</h3>
+          <p data-zh="class / id / 后代选择器 / var() 变量 / 盒模型全支持，默认浅色 + 蓝色主色，一行不写就是这个观感。"
+             data-en="Classes, ids, descendant selectors, var() tokens and a full box model — with a light, blue-accent theme by default.">
+            <code>class</code> / <code>id</code> / 后代选择器 / <code>var()</code> 变量 / 盒模型全支持，默认浅色 + 蓝色主色。
           </p>
+          <span class="code-inline">Card { radius: 14; bg: var(--surface); }</span>
         </div>
 
         <div class="card reveal rd1">
@@ -201,6 +203,26 @@
             保存 <code>.paw</code> 文件，窗口自动重建，State 与脚本函数保持不变。
           </p>
           <span class="code-inline">pawui watch app.paw</span>
+        </div>
+
+        <div class="card reveal rd3">
+          <div class="ic">07</div>
+          <h3 data-zh="脚本操作页面（DOM）" data-en="Script the page (DOM)">脚本操作页面（DOM）</h3>
+          <p data-zh="Python 里 query / on / append / remove / inject_css，跟写前端那套一样，事件还会冒泡。"
+             data-en="query, on, append, remove and inject_css from Python — the same verbs as the web, with event bubbling.">
+            Python 里 <code>query</code> / <code>on</code> / <code>append</code> / <code>remove</code> / <code>inject_css</code>，跟写前端那套一样。
+          </p>
+          <span class="code-inline">app.on(".card", "click", fn)</span>
+        </div>
+
+        <div class="card reveal rd1">
+          <div class="ic">08</div>
+          <h3 data-zh="十万行也不卡" data-en="100k rows, no stutter">十万行也不卡</h3>
+          <p data-zh="VirtualList 只渲染视口里的十几行，行数从一千涨到十万，建树时间几乎不动。"
+             data-en="VirtualList renders only the rows in the viewport: cost stays flat from 1k to 100k rows.">
+            <code>VirtualList</code> 只渲染视口里的十几行 —— 1000 行 87ms，100000 行 139ms。
+          </p>
+          <span class="code-inline">&lt;VirtualList rows="{$rows}"&gt;</span>
         </div>
       </div>
     </div>
@@ -286,10 +308,10 @@
     <div class="container">
       <div class="sec-head reveal">
         <span class="eyebrow" data-zh="组件库" data-en="Components">组件库</span>
-        <h2 class="h2" data-zh="开箱即用的 17 个组件 + 2 个逻辑容器" data-en="17 components + 2 logic containers out of the box">开箱即用的 17 个组件 + 2 个逻辑容器</h2>
-        <p data-zh="从布局到交互，覆盖常见界面需求。17 个组件负责界面，If / For 负责条件与列表。"
-           data-en="From layout to interaction: 17 UI components, plus If / For for conditions and lists.">
-          从布局到交互，覆盖常见界面需求。17 个组件负责界面，If / For 负责条件与列表。
+        <h2 class="h2" data-zh="开箱即用的 44 个组件 + 2 个逻辑容器" data-en="44 components + 2 logic containers out of the box">开箱即用的 44 个组件 + 2 个逻辑容器</h2>
+        <p data-zh="从布局、表单、数据表格到自绘 Canvas，还有 If / For 负责条件与列表。"
+           data-en="Layout, forms, data tables and a QPainter canvas — plus If / For for conditions and lists.">
+          从布局、表单、数据表格到自绘 Canvas，还有 If / For 负责条件与列表。
         </p>
       </div>
       <div class="bento" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">
@@ -298,6 +320,10 @@
         <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">Row</span></span>
         <span class="cmd-row reveal rd3" style="justify-content:center"><span class="v">Scroll</span></span>
         <span class="cmd-row reveal" style="justify-content:center"><span class="v">Tabs</span></span>
+        <span class="cmd-row reveal rd1" style="justify-content:center"><span class="v">Grid</span></span>
+        <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">SplitPane</span></span>
+        <span class="cmd-row reveal rd3" style="justify-content:center"><span class="v">Panel</span></span>
+        <span class="cmd-row reveal" style="justify-content:center"><span class="v">Accordion</span></span>
         <span class="cmd-row reveal rd1" style="justify-content:center"><span class="v">Text</span></span>
         <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">Button</span></span>
         <span class="cmd-row reveal rd3" style="justify-content:center"><span class="v">Input</span></span>
@@ -305,11 +331,33 @@
         <span class="cmd-row reveal rd1" style="justify-content:center"><span class="v">Checkbox</span></span>
         <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">Slider</span></span>
         <span class="cmd-row reveal rd3" style="justify-content:center"><span class="v">Progress</span></span>
+        <span class="cmd-row reveal" style="justify-content:center"><span class="v">RadioGroup</span></span>
+        <span class="cmd-row reveal rd1" style="justify-content:center"><span class="v">Segmented</span></span>
+        <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">Select</span></span>
+        <span class="cmd-row reveal rd3" style="justify-content:center"><span class="v">NumberInput</span></span>
+        <span class="cmd-row reveal" style="justify-content:center"><span class="v">DatePicker</span></span>
+        <span class="cmd-row reveal rd1" style="justify-content:center"><span class="v">TimePicker</span></span>
+        <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">FilePicker</span></span>
+        <span class="cmd-row reveal rd3" style="justify-content:center"><span class="v">Form</span></span>
+        <span class="cmd-row reveal" style="justify-content:center"><span class="v">Table</span></span>
+        <span class="cmd-row reveal rd1" style="justify-content:center"><span class="v">List</span></span>
+        <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">VirtualList</span></span>
+        <span class="cmd-row reveal rd3" style="justify-content:center"><span class="v">Canvas</span></span>
+        <span class="cmd-row reveal" style="justify-content:center"><span class="v">Markdown</span></span>
+        <span class="cmd-row reveal rd1" style="justify-content:center"><span class="v">CodeBlock</span></span>
+        <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">Badge</span></span>
+        <span class="cmd-row reveal rd3" style="justify-content:center"><span class="v">Avatar</span></span>
+        <span class="cmd-row reveal" style="justify-content:center"><span class="v">Skeleton</span></span>
+        <span class="cmd-row reveal rd1" style="justify-content:center"><span class="v">Spinner</span></span>
+        <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">Link</span></span>
+        <span class="cmd-row reveal rd3" style="justify-content:center"><span class="v">Shortcut</span></span>
         <span class="cmd-row reveal" style="justify-content:center"><span class="v">Image</span></span>
         <span class="cmd-row reveal rd1" style="justify-content:center"><span class="v">Divider</span></span>
         <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">Spacer</span></span>
         <span class="cmd-row reveal rd3" style="justify-content:center"><span class="v">Tooltip</span></span>
         <span class="cmd-row reveal" style="justify-content:center"><span class="v">Web</span></span>
+        <span class="cmd-row reveal rd1" style="justify-content:center"><span class="v">Menu</span></span>
+        <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">Dialog</span></span>
         <span class="cmd-row reveal rd1" style="justify-content:center"><span class="v">If</span></span>
         <span class="cmd-row reveal rd2" style="justify-content:center"><span class="v">For</span></span>
       </div>
@@ -439,6 +487,8 @@
         <div class="footer-col">
           <b data-zh="资源" data-en="Resources">资源</b>
           <a href="https://pypi.org/project/pawui/" target="_blank" rel="noopener">PyPI</a>
+          <a href="https://github.com/LK-BLOG/PawUI" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/LK-BLOG/PawUI/issues" target="_blank" rel="noopener" data-zh="反馈问题" data-en="Issues">反馈问题</a>
           <a href="docs/index.html#/cli" data-zh="命令行" data-en="CLI">命令行</a>
           <a href="docs/index.html#/faq" data-zh="常见问题" data-en="FAQ">常见问题</a>
         </div>
@@ -488,8 +538,15 @@
     .then(function (r) { return r.text(); })
     .then(function (xml) {
       var doc = new DOMParser().parseFromString(xml, 'text/xml');
-      var item = doc.querySelector('item > title');
-      var version = item ? item.textContent.trim() : '';
+      /* PyPI 的 RSS 标题是「包名 版本号」（pawui 0.1.3），只取版本号那一段，
+         否则页面上会出现「vpawui 0.1.3」和「pawui-pawui 0.1.3」。 */
+      var items = doc.querySelectorAll('item');
+      var version = '';
+      for (var n = 0; n < items.length; n++) {
+        var raw = items[n].querySelector('title');
+        var m = raw && raw.textContent.trim().match(/(\d+\.\d+(?:\.\d+)?(?:[-+._a-zA-Z0-9]*)?)/);
+        if (m) { version = m[1].replace(/^v/i, ''); break; }
+      }
       if (!version) return;
       var tag = document.getElementById('version-tag');
       if (tag) { tag.textContent = 'v' + version; tag.hidden = false; }

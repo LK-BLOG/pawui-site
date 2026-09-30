@@ -35,9 +35,25 @@ state.items.append(x)             # 差：不触发刷新
 state.items = state.items + [x]   # 好：赋新列表
 ```
 
-## 控制列表渲染规模
+## 长列表用 `<VirtualList>`
 
-`<For>` 会为每一项构建真实控件。几百项尚可，上千项就该分页或虚拟化（只渲染可见部分）：
+`<For>` 会给每一项建真实控件 —— 1000 行就是约 3000 个 QWidget，窗口又慢又沉。
+`<VirtualList>` 只建视口里的行，滚动时替换可见的那一段，成本不再随数据量增长：
+
+| 行数 | `<For>` 建树 | `<VirtualList>` 建树 |
+| --- | --- | --- |
+| 100 | 45 ms | 57 ms |
+| 1 000 | 1 300 ms | 87 ms |
+| 2 000 | 3 200 ms | 88 ms |
+| 100 000 | — | 139 ms |
+
+```html
+<VirtualList rows="{$rows}" row_height="34" height="420">
+  <Row><Text>{$item.name}</Text></Row>
+</VirtualList>
+```
+
+几行用 `<For>`、几百行用 `<Table>`，再往上就该 `<VirtualList>`。如果坚持分页，切片要小：
 
 ```python
 state.page = 1
@@ -46,6 +62,11 @@ def page_items():
     return state.all_items[start:start + 50]
 state.page_items = page_items
 ```
+
+## 样式不贵，但也别乱来
+
+规则在文档加载时解析一次，之后匹配控件只是查表；算出来没变的样式表会跳过重设。
+但别在循环里 `inject_css` —— 注入一次带 class 的规则，然后 `.add_class(...)` 切换。
 
 ## 少用全量 refresh
 
@@ -76,7 +97,8 @@ state.page_items = page_items
 - 主线程里有没有 `time.sleep` / 同步网络请求？
 - 列表是原地修改还是赋新对象？
 - 是否频繁调用 `app.refresh()`？
-- 大列表是否做了分页？
+- 长列表是否用了 `<VirtualList>` 而不是 `<For>`？
+- `inject_css` 是不是只在样式变化时调一次，而不是塞在循环里？
 
 ## 下一步
 

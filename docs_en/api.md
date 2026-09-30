@@ -1,190 +1,219 @@
 # API Reference
 
-PawUI runs `.paw` files from the command line, and can also be embedded as a Python library.
+## Core Classes
 
-## Top-level API
+### `pawui.Runtime`
 
-```python
-from pawui import run, main
-
-run("app.paw")                 # run a file (blocks until the window closes)
-main(["check", "app.paw"])     # CLI equivalent, returns exit code
-```
-
-| Name | Notes |
-|------|-------|
-| `pawui.run(path, context=None, theme="dark")` | Read and run a `.paw` file |
-| `pawui.main(argv=None) -> int` | CLI entry point, returns exit code |
-| `pawui.__version__` | Version string |
-
-## Runtime
+Main runtime class.
 
 ```python
-from pawui.runtime import Runtime, render
+class Runtime:
+    def __init__(self, source: str, filename: str = "<memory>", 
+                 context: dict | None = None, theme: str = "dark")
+    
+    def run(self, block: bool = True) -> QWidget
+    def set_theme(self, name_or_theme: str | Theme) -> None
+    def refresh(self) -> None
+    def invoke(self, handler: Any, *args: Any) -> Any
+    def queue_animation(self, widget: QWidget, kind: str, 
+                        duration: int, delay: int, curve: str) -> None
 ```
 
-### `render(...)`
+### `pawui.State`
+
+Reactive state container.
 
 ```python
-def render(source, filename="<memory>", context=None, theme="dark", block=False):
-    ...
+class State:
+    def __init__(self, initial: dict[str, Any] | None = None)
+    
+    def get(self, key: str, default: Any = "") -> Any
+    def set(self, key: str, value: Any) -> None
+    def has(self, key: str) -> bool
+    def watch(self, key: str, fn: Callable[[Any], None]) -> Callable[[], None]
+    def keys(self) -> list[str]
+    def snapshot(self) -> dict[str, Any]
+    
+    # Attribute access
+    def __getattr__(self, key: str) -> Any
+    def __setattr__(self, key: str, value: Any) -> None
+    def __getitem__(self, key: str) -> Any
+    def __setitem__(self, key: str, value: Any) -> None
+    def __contains__(self, key: str) -> bool
 ```
 
-Render from a source string; returns the root `QWidget`.
+### `pawui.Theme`
+
+Theme configuration.
 
 ```python
-from pawui.runtime import render
-
-source = open("app.paw", encoding="utf-8").read()
-root = render(source, block=False)
+class Theme:
+    background: str
+    surface: str
+    text: str
+    subtext: str
+    accent: str
+    border: str
+    danger: str
+    spacing: int
+    padding: int
+    radius: int
+    font_family: str
+    font_size: int
+    title_size: int
+    custom: dict[str, str]
+    
+    @classmethod
+    def light(cls) -> "Theme"
+    @classmethod
+    def dark(cls) -> "Theme"
+    
+    def override(self, **kwargs) -> "Theme"
+    def color(self, name: str, default: str | None = None) -> str | None
+    def apply(self, overrides: dict[str, str]) -> "Theme"
+    def qss(self) -> str
+    def to_dict(self) -> dict[str, Any]
 ```
 
-### `Runtime`
+### `pawui.parser.parse`
 
 ```python
-from pawui.runtime import Runtime
-
-rt = Runtime(source, filename="app.paw", context={"api": client}, theme="dark")
-rt.run(block=True)
+def parse(source: str, filename: str = "<memory>") -> Program
 ```
 
-| Member | Notes |
-|--------|-------|
-| `rt.state` | Reactive `State` object |
-| `rt.root` | Root `QWidget` |
-| `rt.namespace` | Script top-level namespace (functions, etc.) |
-| `rt.theme` | Current `Theme` |
-| `rt.run(block=True)` | Prepare, build, and enter the event loop |
-| `rt.refresh()` | Rebuild the UI (scheduled on the event loop) |
-| `rt.reload(source)` | Re-parse and rebuild, preserving State |
-| `rt.invoke(handler, *args)` | Call a handler according to its signature |
-| `rt.invoke_async(handler, *args, done=None)` | Run on a thread; `done(result, error)` on the main thread |
-| `rt.set_theme(name_or_theme)` | Switch theme |
-
-### Injecting `context`
-
-`context` passed to `Runtime` / `render` is merged into the script namespace, useful for dependency injection:
+### `pawui.resolve`
 
 ```python
-class Client:
-    def fetch(self):
-        return ["a", "b"]
-
-rt = Runtime(source, context={"client": Client()})
+def resolve_prop_value(value: Any, scope: dict, runtime: Runtime) -> Any
+def resolve_raw(value: Any, scope: dict, runtime: Runtime) -> Any
+def resolve_template(template: str, scope: dict, runtime: Runtime) -> str
+def resolve_handler(value: Any, scope: dict, runtime: Runtime) -> Any
+def is_template(v: Any) -> bool
+def collect_refs(template: str, scope: dict, runtime: Runtime) -> set[str]
 ```
 
-```html
-<Button on_click="load"/>
-```
+### `pawui.animate`
 
 ```python
-def load():
-    state.items = client.fetch()
+def entrance(widget: QWidget, kind: str, duration: int = 260, 
+             delay: int = 0, curve: str = "out-cubic") -> QParallelAnimationGroup
+def easing(name: str) -> QEasingCurve.Type
+def is_animation(kind: str) -> bool
 ```
 
-## Parser
+## Built-in Components
+
+Available via `pawui.components.BUILTINS`:
+
+- `Window`
+- `Column`
+- `Row`
+- `Text`
+- `Button`
+- `Input`
+- `Checkbox`
+- `Divider`
+- `Spacer`
+- `Slider`
+- `Progress`
+- `Select`
+- `Dialog`
+- `Menu`
+- `Form`
+- `Tabs`
+- `Image`
+- `Tooltip`
+- `TextArea`
+- `Scroll`
+- `Web`
+- `Grid`
+- `Radio`
+- `RadioGroup`
+- `Segmented`
+- `NumberInput`
+- `DatePicker`
+- `TimePicker`
+- `FilePicker`
+- `Badge`
+- `Avatar`
+- `Skeleton`
+- `Spinner`
+- `Link`
+- `CodeBlock`
+- `Markdown`
+- `Panel`
+- `Accordion`
+- `SplitPane`
+- `List`
+- `Table`
+- `VirtualList`
+- `Canvas`
+- `Shortcut`
+
+共 44 个内置组件，另有 `<If>` / `<For>` 两个逻辑容器。
+
+## DOM API（`Runtime` / `<script>` 里的 `app`）
 
 ```python
-from pawui.parser import parse
-from pawui.nodes import Element, ScriptBlock, Program
-
-program = parse(source, "app.paw")
-program.elements     # list[Element]
-program.script       # ScriptBlock | None
+app.query(selector)                  # -> Element | None
+app.query_all(selector)              # -> list[Element]
+app.on(selector, kind, handler)      # 按选择器绑事件，返回绑定数量
+app.append(target, markup, prepend=False)   # -> list[Element]
+app.remove(target)                   # -> bool
+app.inject_css(text)                 # 全局注入，追加在 <Style> 之后
+app.css(selector, declarations)
+app.toast(text, kind="info", duration=2400)
+app.ready(fn)                        # 控件树建好后执行
+app.validate()                       # 校验并把错误画到字段上 -> bool
+app.submit()                         # 校验 + 调 <Form on_submit>
+app.inspect_tree()                   # -> str，pawui inspect 用的就是它
 ```
 
-| Node | Fields |
-|------|--------|
-| `Program` | `elements`, `script` |
-| `Element` | `tag`, `props`, `children`, `pos`, `name` |
-| `ScriptBlock` | `source`, `pos` |
-
-## State
+`Element` 句柄（`app.query(...)` 的返回值）：
 
 ```python
-from pawui.state import State
-
-s = State({"count": 0})
-s.count                # 0
-s["count"]             # 0
-s.get("missing", 5)    # 5
-s.has("count")         # True
-s.set("count", 1)      # notifies listeners
-s.watch("count", fn)   # subscribe; returns unsubscribe
-s.keys()               # ["count"]
-s.snapshot()           # {"count": 1}
+el.text / el.value / el.id / el.tag / el.classes
+el.attr(name, value=None)
+el.add_class(*names) / el.remove_class(*names) / el.toggle_class(name) / el.has_class(name)
+el.css(declarations) / el.on(kind, handler)
+el.append(markup) / el.prepend(markup) / el.clear() / el.remove()
+el.children() / el.closest(selector) / el.query(selector) / el.query_all(selector)
 ```
 
-## Theme
-
-```python
-from pawui.theme import Theme, THEMES
-
-Theme.dark()            # dark Theme instance
-Theme.light()           # light Theme instance
-THEMES["dark"]          # factory function
-
-t = Theme.dark()
-t.accent = "#ff6b6b"
-t.override(radius=12)   # returns a new Theme
-t.color("accent")       # look up a color
-t.apply({"brand": "#4ecdc4"})  # batch overrides
-```
+事件类型：`click` `change` `input` `enter` `hover` `leave` `focus` `blur`。
+回调收到 `Event`，字段为 `type` / `target` / `value` / `key` / `checked`。
 
 ## Errors
 
 ```python
-from pawui.errors import (
-    PyxError,        # base; .message / .pos / .formatted()
-    LexerError,
-    ParseError,
-    ComponentError,
-    RenderError,
-    ScriptError,
-)
+class PyxError(Exception)
+class LexerError(PyxError)
+class ParseError(PyxError)
+class ComponentError(PyxError)
+class RenderError(PyxError)
+class ScriptError(PyxError)
 ```
 
-Catch and display nicely:
+## AST Nodes
 
 ```python
-from pawui.errors import PyxError
-
-try:
-    run("app.paw")
-except PyxError as e:
-    print(e.formatted())   # PawUI error: ...  (at line N:C)
+class Element
+class ScriptBlock
+class Program
+class ComponentDef
+class Symbol          # 运行时解析用；解析器不产生此节点
+class Position
 ```
 
-## Full embedding example
+## Module Exports
 
 ```python
-from pawui.runtime import Runtime
-from pawui.errors import PyxError
+# pawui/__init__.py
+__all__ = ["run", "main", "Runtime", "State", "Theme",
+           "PawUIError", "PyxError", "ParseError", "RenderError", "ScriptError"]
+__version__ = "0.1.3"
 
-SOURCE = """
-<Window title="Embedded" width="360" height="200">
-  <Column padding="24" spacing="12">
-    <Text size="18" bold>{$message}</Text>
-    <Button on_click="greet">Greet</Button>
-  </Column>
-</Window>
-
-<script>
-state.message = "Hello"
-
-def greet():
-    state.message = "Button clicked"
-</script>
-"""
-
-rt = Runtime(SOURCE, context={})
-try:
-    rt.run(block=True)          # blocks until the window closes
-except PyxError as e:
-    print(e.formatted())
+# pawui.cli
+run(path, context=None, theme="dark") -> None
+main(argv=None) -> int
 ```
-
-## Next
-
-- [CLI](#/cli) — every `pawui` command
-- [State & Scripts](#/state-scripts) — state-driven UI

@@ -13,7 +13,7 @@ PawUI 内置 **44 个组件**，覆盖布局、展示、交互、数据与绘图
 | `title` | str | `"PawUI"` | 窗口标题 |
 | `width` | int | `480` | 宽度（px） |
 | `height` | int | `640` | 高度（px） |
-| `theme` | str | `"light"` | `dark` / `light` |
+| `theme` | str | `"dark"` | `dark` / `light` |
 | `padding` | int | `0` | 内边距 |
 | `spacing` | int | `8` | 子元素间距 |
 
@@ -231,61 +231,6 @@ iOS 风格开关，标签写在标签内容里。
 ```html
 <Web src="https://example.com"/>
 ```
-
-## Menu
-
-原生弹出菜单，渲染成一个下拉按钮。
-
-| 属性 | 类型 | 默认 | 说明 |
-|------|------|------|------|
-| `label` | str | `"Menu"` | 按钮文字 |
-| `items` | list | `[]` | 菜单项，接受 `[a, b, c]` 或 `{$list}` |
-| `bg` | str | `surface` | 按钮背景色 |
-| `fg` | str | `text` | 按钮文字色 |
-| `radius` | int | `10` | 圆角 |
-| `on_select` | str | — | 选中时调用 `handler(text)` |
-| `bind` | str | — | 把选中的项写回 state |
-
-```html
-<Menu label="操作" items="[打开, 保存, 关闭]" on_select="do_it" bind="action"/>
-```
-
-## Dialog
-
-内嵌对话框面板，直接写在布局里，不弹窗。
-
-| 属性 | 类型 | 默认 | 说明 |
-|------|------|------|------|
-| `title` | str | `""` | 标题，为空则不显示 |
-| `open` | bool | `true` | 是否显示，支持 `{$flag}` |
-| `cancel` | str | `"Cancel"` | 取消按钮文字，留空则不显示 |
-| `accept` | str | `"OK"` | 确认按钮文字，留空则不显示 |
-| `on_accept` | str | — | 点击确认 |
-| `on_reject` | str | — | 点击取消 |
-| `radius` | int | `12` | 面板圆角 |
-| `button_radius` | int | `10` | 按钮圆角 |
-
-```html
-<Dialog title="确认删除" open="{$show}" on_accept="yes" on_reject="no">
-  <Text>删除后无法恢复。</Text>
-</Dialog>
-```
-
-## Shortcut
-
-应用级键盘快捷键，不占视觉位置（渲染为 0×0 的占位控件）。
-
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `keys` | str | 组合键，如 `Ctrl+S` |
-| `on_press` | str | 触发时调用的处理器名 |
-
-```html
-<Shortcut keys="Ctrl+S" on_press="save"/>
-<Shortcut keys="Ctrl+Q" on_press="quit"/>
-```
-
-`keys` 与 `on_press` 都写了才会注册。作用域是整个应用，任意窗口聚焦时都能触发。
 
 ## If
 

@@ -9,7 +9,7 @@ Root element (exactly one per file).
 | `title` | string | "PawUI" | Window title |
 | `width` | int | 480 | Initial width |
 | `height` | int | 640 | Initial height |
-| `theme` | "dark" \| "light" | "light" | Base theme |
+| `theme` | "dark" \| "light" | "dark" | Base theme |
 | `padding` | int | 0 | Window padding |
 | `spacing` | int | theme.spacing | Child spacing |
 
@@ -432,22 +432,6 @@ Native popup menu. `items` accepts a string list or a `{$state}` list reference.
 ```html
 <Menu label="Actions" items="{$actions}" bind="selected" on_select="select_action"/>
 ```
-
-## Shortcut
-
-Application-wide keyboard shortcut. Renders as a 0x0 placeholder, so it takes up no visual space.
-
-| Prop | Type | Description |
-|------|------|-------------|
-| `keys` | string | Key combination, e.g. `Ctrl+S` |
-| `on_press` | string | Handler invoked on activation |
-
-```html
-<Shortcut keys="Ctrl+S" on_press="save"/>
-<Shortcut keys="Ctrl+Q" on_press="quit"/>
-```
-
-Both `keys` and `on_press` must be set for the shortcut to register. The scope is the whole application, so it fires whenever any window has focus.
 
 ## Form validation
 

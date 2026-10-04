@@ -11,7 +11,7 @@ PawUI 用嵌套容器完成布局：`Column` 纵向、`Row` 横向、`Scroll` �
 | `title` | str | `"PawUI"` | 窗口标题 |
 | `width` | int | `480` | 宽度（px） |
 | `height` | int | `640` | 高度（px） |
-| `theme` | str | `"light"` | `dark` / `light` |
+| `theme` | str | `"dark"` | `dark` / `light` |
 | `padding` | int | `0` | 内边距 |
 | `spacing` | int | `8` | 子元素间距 |
 

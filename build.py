@@ -33,7 +33,7 @@ GROUPS = [
       "component-checkbox", "component-slider", "component-progress", "component-scroll",
       "component-tabs", "component-tooltip-web", "component-form-fields",
       "component-data", "component-display", "component-containers-extra",
-      "component-dialog-menu",
+      "component-dialog-menu", "component-extra-fields",
       "component-canvas"]),
     ("advanced", "进阶", "Advanced",
      ["animation", "easings", "stagger", "theming", "color-tokens", "typography",

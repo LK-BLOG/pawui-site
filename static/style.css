@@ -746,6 +746,13 @@ section { padding: 150px 0; position: relative; }
   color: var(--text-4);
 }
 
+.footer-bottom a {
+  color: var(--text-2);
+  transition: color .3s var(--ease);
+}
+
+.footer-bottom a:hover { color: var(--text); }
+
 /* ============================================================
    DOCS
    ============================================================ */

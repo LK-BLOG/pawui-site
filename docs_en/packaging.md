@@ -87,12 +87,30 @@ PySide6 is large (hundreds of MB). Exclude unused Qt modules with `--exclude-mod
 
 Make sure `--add-data` includes `assets`, and resolve paths at runtime with the `resource()` helper above.
 
+## Licensing your packaged app
+
+PawUI is **LGPL-3.0-or-later**. That means you **can ship a closed-source
+application** built with it — but you have to meet two conditions:
+
+1. **Give prominent notice.** State that your app uses PawUI, and include the
+   license texts. In practice: put a line in your About box / README, and ship
+   `LICENSE` (LGPL-3.0) + `COPYING` (GPL-3.0).
+2. **Let users replace the library.** Because PawUI is a normal Python package
+   they `import`, this is satisfied by simply *not* statically baking it in —
+   ship it as a normal dependency and users can swap in their own build.
+
+If you'd rather not deal with any of that, use a permissive UI stack instead.
+
+> LGPL-3.0 is compatible with PySide6 (also LGPL-3.0), so you are not adding a
+> new obligation on top of what Qt already requires.
+
 ## Distribution checklist
 
 - [ ] Build on the target platform (Windows for Windows, macOS for macOS)
 - [ ] Assets included via `--add-data`
 - [ ] Tested on a clean machine
-- [ ] Bundle a LICENSE / README
+- [ ] `LICENSE` (LGPL-3.0) + `COPYING` (GPL-3.0) bundled
+- [ ] About box / README states that the app uses PawUI
 
 ## Next
 

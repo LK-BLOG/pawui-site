@@ -87,12 +87,30 @@ PySide6 体积较大（数百 MB）。可以用 `--exclude-module` 排除不用�
 
 确认 `--add-data` 包含了 `assets`，并在运行时用上面的 `resource()` 解析路径。
 
+## 打包后要闭源？先看许可证
+
+PawUI 是 **LGPL-3.0-or-later**。也就是说，你**可以把用 PawUI 做的程序闭源发布** ——
+但要满足两个条件：
+
+1. **给出显著声明**：写明你的程序用了 PawUI，并随程序附上许可证文本。
+   实操上就是：About 框 / README 里写一行，并把 `LICENSE`（LGPL-3.0）和
+   `COPYING`（GPL-3.0）一起打包出去。
+2. **允许用户替换这个库**：PawUI 是普通 Python 包（`import pawui`），只要别把它
+   静态焊死进可执行文件、让它作为正常依赖存在，用户就能换成自己编译的版本 ——
+   这一条天然满足。
+
+不想承担这些义务，就换一套宽松许可的 UI 库。
+
+> LGPL-3.0 和 PySide6（同为 LGPL-3.0）一致，所以你并没有在 Qt 已有的要求之上
+> 增加新的负担。
+
 ## 分发清单
 
 - [ ] 目标平台构建（Windows 构建 Windows，macOS 构建 macOS）
 - [ ] 资源文件已 `--add-data`
 - [ ] 在干净机器上测试运行
-- [ ] 附带 LICENSE / 说明
+- [ ] `LICENSE`（LGPL-3.0）+ `COPYING`（GPL-3.0）一起打包
+- [ ] About 框 / README 写明用了 PawUI
 
 ## 下一步
 
